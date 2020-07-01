@@ -3,19 +3,105 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4467D82C67091E2F96E3F24C /* Pods_Wildlife_Research_Center.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571D36F21F434528C9818E01 /* Pods_Wildlife_Research_Center.framework */; };
+		4D3AB33A24813AD600939020 /* SubmitMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3AB33924813AD600939020 /* SubmitMaster.swift */; };
+		4D43F099246EAB28002BA9FA /* WebServiceSubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43F098246EAB28002BA9FA /* WebServiceSubClass.swift */; };
+		4D43F09C246EB906002BA9FA /* ResponseInitClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43F09B246EB906002BA9FA /* ResponseInitClass.swift */; };
+		4D48E7D9247D265B006040E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48E7D8247D265B006040E4 /* NetworkManager.swift */; };
+		4D541B1F247F91440055ADBB /* SubmitReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D541B1E247F91440055ADBB /* SubmitReport.swift */; };
+		4D597D39247BF9B400470A07 /* ScentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D597D38247BF9B400470A07 /* ScentData.swift */; };
+		4D597D3B247BFB3B00470A07 /* BrandData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D597D3A247BFB3A00470A07 /* BrandData.swift */; };
+		4D5BE9C3246ED0E1005FFD0C /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BE9C2246ED0E1005FFD0C /* Validator.swift */; };
+		4D644AC92472AB3300DADDCF /* StoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D644AC82472AB3300DADDCF /* StoreInfo.swift */; };
+		4D90B9F9246E784500E37C80 /* ApiPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90B9F8246E784500E37C80 /* ApiPaths.swift */; };
+		4D90B9FD246E799B00E37C80 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90B9FC246E799B00E37C80 /* Method.swift */; };
+		4D90B9FF246E7AB000E37C80 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90B9FE246E7AB000E37C80 /* WebServices.swift */; };
+		4D90BA01246E7B7300E37C80 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA00246E7B7300E37C80 /* Utilities.swift */; };
+		4D90BA05246E7E3600E37C80 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA04246E7E3600E37C80 /* String+Extensions.swift */; };
+		4D90BA08246E85E100E37C80 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA07246E85E100E37C80 /* AppInfo.swift */; };
+		4D90BA0B246E877A00E37C80 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA0A246E877A00E37C80 /* Colors.swift */; };
+		4D90BA0D246E881500E37C80 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA0C246E881500E37C80 /* UIColor+Extension.swift */; };
+		4D90BA10246E896600E37C80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA0F246E896600E37C80 /* UserInfo.swift */; };
+		4D90BA12246E8A0800E37C80 /* ResProfileDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA11246E8A0800E37C80 /* ResProfileDatum.swift */; };
+		4DA3654C247398BC007CB068 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3654B247398BC007CB068 /* SelectLocationViewController.swift */; };
+		4DA3654E24739C1F007CB068 /* SelectStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3654D24739C1F007CB068 /* SelectStoreTableViewCell.swift */; };
+		6E20F4AF24A70A930065C18E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4AE24A70A930065C18E /* AppUser.swift */; };
+		6E20F4B124A70C6B0065C18E /* ReportModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B024A70C6B0065C18E /* ReportModal.swift */; };
+		6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B224A724F40065C18E /* PhotoModal.swift */; };
 		6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40D24507956002AEF26 /* AppDelegate.swift */; };
 		6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40F24507956002AEF26 /* SceneDelegate.swift */; };
 		6E6EC41224507956002AEF26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC41124507956002AEF26 /* ViewController.swift */; };
 		6E6EC41524507956002AEF26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6EC41324507956002AEF26 /* Main.storyboard */; };
 		6E6EC41724507957002AEF26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E6EC41624507957002AEF26 /* Assets.xcassets */; };
 		6E6EC41A24507957002AEF26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6EC41824507957002AEF26 /* LaunchScreen.storyboard */; };
+		6E6EC42524507C1A002AEF26 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC42424507C1A002AEF26 /* Singleton.swift */; };
+		6E6EC42724507E6B002AEF26 /* UIView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC42624507E6B002AEF26 /* UIView+Extention.swift */; };
+		6E6EC4292450805E002AEF26 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC4282450805E002AEF26 /* Constant.swift */; };
+		6E6EC42B245080D6002AEF26 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC42A245080D6002AEF26 /* Color.swift */; };
+		6E77B2F02451618600C3A110 /* Aileron-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E02451618400C3A110 /* Aileron-LightItalic.otf */; };
+		6E77B2F12451618600C3A110 /* Aileron-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E12451618400C3A110 /* Aileron-Heavy.otf */; };
+		6E77B2F22451618600C3A110 /* Aileron-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E22451618400C3A110 /* Aileron-Regular.otf */; };
+		6E77B2F32451618600C3A110 /* Aileron-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E32451618400C3A110 /* Aileron-Italic.otf */; };
+		6E77B2F42451618600C3A110 /* Aileron-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E42451618500C3A110 /* Aileron-BoldItalic.otf */; };
+		6E77B2F52451618600C3A110 /* Aileron-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E52451618500C3A110 /* Aileron-Bold.otf */; };
+		6E77B2F62451618600C3A110 /* Aileron-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E62451618500C3A110 /* Aileron-HeavyItalic.otf */; };
+		6E77B2F72451618600C3A110 /* Aileron-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E72451618500C3A110 /* Aileron-Thin.otf */; };
+		6E77B2F82451618600C3A110 /* Aileron-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E82451618500C3A110 /* Aileron-ThinItalic.otf */; };
+		6E77B2F92451618600C3A110 /* Aileron-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2E92451618500C3A110 /* Aileron-SemiBoldItalic.otf */; };
+		6E77B2FA2451618600C3A110 /* Aileron-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2EA2451618500C3A110 /* Aileron-Black.otf */; };
+		6E77B2FB2451618600C3A110 /* Aileron-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2EB2451618500C3A110 /* Aileron-Light.otf */; };
+		6E77B2FC2451618600C3A110 /* Aileron-UltraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2EC2451618500C3A110 /* Aileron-UltraLightItalic.otf */; };
+		6E77B2FD2451618600C3A110 /* Aileron-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2ED2451618500C3A110 /* Aileron-SemiBold.otf */; };
+		6E77B2FE2451618600C3A110 /* Aileron-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2EE2451618600C3A110 /* Aileron-UltraLight.otf */; };
+		6E77B2FF2451618600C3A110 /* Aileron-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E77B2EF2451618600C3A110 /* Aileron-BlackItalic.otf */; };
+		6E77B3022451792D00C3A110 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77B3012451792D00C3A110 /* LoginViewController.swift */; };
+		6E77B304245188B400C3A110 /* UITextField+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77B303245188B400C3A110 /* UITextField+Extention.swift */; };
+		6E77B3072451B00C00C3A110 /* RetailReportSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77B3062451B00C00C3A110 /* RetailReportSecondViewController.swift */; };
+		6E77B3092451B34000C3A110 /* RetailReportSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77B3082451B34000C3A110 /* RetailReportSecondTableViewCell.swift */; };
+		6E77B30B2451CB9A00C3A110 /* RetailReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77B30A2451CB9A00C3A110 /* RetailReportViewController.swift */; };
+		6E8200282452B8020071EB6D /* UIButton+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8200272452B8020071EB6D /* UIButton+Extention.swift */; };
+		6E82002B2452B9750071EB6D /* SelectStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82002A2452B9750071EB6D /* SelectStoreViewController.swift */; };
+		6E82002E2452C2390071EB6D /* ReportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82002D2452C2390071EB6D /* ReportListViewController.swift */; };
+		6E8200302452CB2B0071EB6D /* ReportListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82002F2452CB2B0071EB6D /* ReportListTableViewCell.swift */; };
+		6E820032245302E00071EB6D /* RetailReportMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E820031245302E00071EB6D /* RetailReportMainViewController.swift */; };
+		6E820034245303160071EB6D /* RetaildReportMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E820033245303160071EB6D /* RetaildReportMainTableViewCell.swift */; };
+		6E820036245311490071EB6D /* RetailReportThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E820035245311490071EB6D /* RetailReportThirdViewController.swift */; };
+		6E820038245313B30071EB6D /* UIViewController+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E820037245313B30071EB6D /* UIViewController+Extention.swift */; };
+		6E952C2524A9B2F0004BE31E /* OfflineReportModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E952C2424A9B2F0004BE31E /* OfflineReportModal.swift */; };
+		6EC8999F24AB14F800C4B502 /* SelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8999E24AB14F800C4B502 /* SelectionButton.swift */; };
+		6ED44642245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED44641245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D3AB33924813AD600939020 /* SubmitMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMaster.swift; sourceTree = "<group>"; };
+		4D43F098246EAB28002BA9FA /* WebServiceSubClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceSubClass.swift; sourceTree = "<group>"; };
+		4D43F09B246EB906002BA9FA /* ResponseInitClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseInitClass.swift; sourceTree = "<group>"; };
+		4D48E7D8247D265B006040E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4D541B1E247F91440055ADBB /* SubmitReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitReport.swift; sourceTree = "<group>"; };
+		4D597D38247BF9B400470A07 /* ScentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScentData.swift; sourceTree = "<group>"; };
+		4D597D3A247BFB3A00470A07 /* BrandData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandData.swift; sourceTree = "<group>"; };
+		4D5BE9C2246ED0E1005FFD0C /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		4D644AC82472AB3300DADDCF /* StoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfo.swift; sourceTree = "<group>"; };
+		4D90B9F8246E784500E37C80 /* ApiPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPaths.swift; sourceTree = "<group>"; };
+		4D90B9FC246E799B00E37C80 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		4D90B9FE246E7AB000E37C80 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
+		4D90BA00246E7B7300E37C80 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		4D90BA04246E7E3600E37C80 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		4D90BA07246E85E100E37C80 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		4D90BA0A246E877A00E37C80 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4D90BA0C246E881500E37C80 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		4D90BA0F246E896600E37C80 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		4D90BA11246E8A0800E37C80 /* ResProfileDatum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResProfileDatum.swift; sourceTree = "<group>"; };
+		4DA3654B247398BC007CB068 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
+		4DA3654D24739C1F007CB068 /* SelectStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStoreTableViewCell.swift; sourceTree = "<group>"; };
+		571D36F21F434528C9818E01 /* Pods_Wildlife_Research_Center.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wildlife_Research_Center.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E20F4AE24A70A930065C18E /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		6E20F4B024A70C6B0065C18E /* ReportModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModal.swift; sourceTree = "<group>"; };
+		6E20F4B224A724F40065C18E /* PhotoModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModal.swift; sourceTree = "<group>"; };
 		6E6EC40A24507956002AEF26 /* Wildlife Research Center.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildlife Research Center.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6EC40D24507956002AEF26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E6EC40F24507956002AEF26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +110,44 @@
 		6E6EC41624507957002AEF26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E6EC41924507957002AEF26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E6EC41B24507957002AEF26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E6EC42424507C1A002AEF26 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		6E6EC42624507E6B002AEF26 /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
+		6E6EC4282450805E002AEF26 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		6E6EC42A245080D6002AEF26 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6E77B2E02451618400C3A110 /* Aileron-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-LightItalic.otf"; sourceTree = "<group>"; };
+		6E77B2E12451618400C3A110 /* Aileron-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Heavy.otf"; sourceTree = "<group>"; };
+		6E77B2E22451618400C3A110 /* Aileron-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Regular.otf"; sourceTree = "<group>"; };
+		6E77B2E32451618400C3A110 /* Aileron-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Italic.otf"; sourceTree = "<group>"; };
+		6E77B2E42451618500C3A110 /* Aileron-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-BoldItalic.otf"; sourceTree = "<group>"; };
+		6E77B2E52451618500C3A110 /* Aileron-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Bold.otf"; sourceTree = "<group>"; };
+		6E77B2E62451618500C3A110 /* Aileron-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-HeavyItalic.otf"; sourceTree = "<group>"; };
+		6E77B2E72451618500C3A110 /* Aileron-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Thin.otf"; sourceTree = "<group>"; };
+		6E77B2E82451618500C3A110 /* Aileron-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-ThinItalic.otf"; sourceTree = "<group>"; };
+		6E77B2E92451618500C3A110 /* Aileron-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		6E77B2EA2451618500C3A110 /* Aileron-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Black.otf"; sourceTree = "<group>"; };
+		6E77B2EB2451618500C3A110 /* Aileron-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Light.otf"; sourceTree = "<group>"; };
+		6E77B2EC2451618500C3A110 /* Aileron-UltraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-UltraLightItalic.otf"; sourceTree = "<group>"; };
+		6E77B2ED2451618500C3A110 /* Aileron-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-SemiBold.otf"; sourceTree = "<group>"; };
+		6E77B2EE2451618600C3A110 /* Aileron-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-UltraLight.otf"; sourceTree = "<group>"; };
+		6E77B2EF2451618600C3A110 /* Aileron-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-BlackItalic.otf"; sourceTree = "<group>"; };
+		6E77B3012451792D00C3A110 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6E77B303245188B400C3A110 /* UITextField+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extention.swift"; sourceTree = "<group>"; };
+		6E77B3062451B00C00C3A110 /* RetailReportSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportSecondViewController.swift; sourceTree = "<group>"; };
+		6E77B3082451B34000C3A110 /* RetailReportSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportSecondTableViewCell.swift; sourceTree = "<group>"; };
+		6E77B30A2451CB9A00C3A110 /* RetailReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportViewController.swift; sourceTree = "<group>"; };
+		6E8200272452B8020071EB6D /* UIButton+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extention.swift"; sourceTree = "<group>"; };
+		6E82002A2452B9750071EB6D /* SelectStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStoreViewController.swift; sourceTree = "<group>"; };
+		6E82002D2452C2390071EB6D /* ReportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportListViewController.swift; sourceTree = "<group>"; };
+		6E82002F2452CB2B0071EB6D /* ReportListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportListTableViewCell.swift; sourceTree = "<group>"; };
+		6E820031245302E00071EB6D /* RetailReportMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportMainViewController.swift; sourceTree = "<group>"; };
+		6E820033245303160071EB6D /* RetaildReportMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetaildReportMainTableViewCell.swift; sourceTree = "<group>"; };
+		6E820035245311490071EB6D /* RetailReportThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportThirdViewController.swift; sourceTree = "<group>"; };
+		6E820037245313B30071EB6D /* UIViewController+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extention.swift"; sourceTree = "<group>"; };
+		6E952C2424A9B2F0004BE31E /* OfflineReportModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineReportModal.swift; sourceTree = "<group>"; };
+		6EC8999E24AB14F800C4B502 /* SelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButton.swift; sourceTree = "<group>"; };
+		6ED44641245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailReportThirdCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACB03E233546D492208D28DA /* Pods-Wildlife Research Center.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildlife Research Center.debug.xcconfig"; path = "Target Support Files/Pods-Wildlife Research Center/Pods-Wildlife Research Center.debug.xcconfig"; sourceTree = "<group>"; };
+		CE4222A1C24987AA3ED6D79D /* Pods-Wildlife Research Center.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildlife Research Center.release.xcconfig"; path = "Target Support Files/Pods-Wildlife Research Center/Pods-Wildlife Research Center.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +155,138 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4467D82C67091E2F96E3F24C /* Pods_Wildlife_Research_Center.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26D841926AD0780A7D40DFBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACB03E233546D492208D28DA /* Pods-Wildlife Research Center.debug.xcconfig */,
+				CE4222A1C24987AA3ED6D79D /* Pods-Wildlife Research Center.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4D43F09A246EB8D9002BA9FA /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				4D43F09B246EB906002BA9FA /* ResponseInitClass.swift */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		4D541B1D247F912F0055ADBB /* Submit */ = {
+			isa = PBXGroup;
+			children = (
+				4D541B1E247F91440055ADBB /* SubmitReport.swift */,
+			);
+			path = Submit;
+			sourceTree = "<group>";
+		};
+		4D644AC72472AB2300DADDCF /* StoreInfo */ = {
+			isa = PBXGroup;
+			children = (
+				4D644AC82472AB3300DADDCF /* StoreInfo.swift */,
+			);
+			path = StoreInfo;
+			sourceTree = "<group>";
+		};
+		4D90B9F4246E76AF00E37C80 /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				4D90B9F7246E781100E37C80 /* Network */,
+				4D90B9F6246E77CE00E37C80 /* RequestModals */,
+				4D90B9F5246E77BE00E37C80 /* ResponseModals */,
+				4D90B9FE246E7AB000E37C80 /* WebServices.swift */,
+				4D43F098246EAB28002BA9FA /* WebServiceSubClass.swift */,
+			);
+			path = WebServices;
+			sourceTree = "<group>";
+		};
+		4D90B9F5246E77BE00E37C80 /* ResponseModals */ = {
+			isa = PBXGroup;
+			children = (
+				4D43F09A246EB8D9002BA9FA /* Init */,
+				4D90BA0E246E894800E37C80 /* UserInfo */,
+			);
+			path = ResponseModals;
+			sourceTree = "<group>";
+		};
+		4D90B9F6246E77CE00E37C80 /* RequestModals */ = {
+			isa = PBXGroup;
+			children = (
+				4D541B1D247F912F0055ADBB /* Submit */,
+				4D644AC72472AB2300DADDCF /* StoreInfo */,
+			);
+			path = RequestModals;
+			sourceTree = "<group>";
+		};
+		4D90B9F7246E781100E37C80 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4D90B9F8246E784500E37C80 /* ApiPaths.swift */,
+				4D90B9FC246E799B00E37C80 /* Method.swift */,
+				4D48E7D8247D265B006040E4 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4D90BA02246E7E0F00E37C80 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4D90BA09246E875B00E37C80 /* Enum */,
+				4D90BA03246E7E1600E37C80 /* Extension */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4D90BA03246E7E1600E37C80 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4D90BA04246E7E3600E37C80 /* String+Extensions.swift */,
+				4D90BA0C246E881500E37C80 /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4D90BA06246E85B700E37C80 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6E6EC42124507985002AEF26 /* Utility */,
+				4D90B9F4246E76AF00E37C80 /* WebServices */,
+				4D90BA07246E85E100E37C80 /* AppInfo.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		4D90BA09246E875B00E37C80 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4D90BA0A246E877A00E37C80 /* Colors.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		4D90BA0E246E894800E37C80 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				4D90BA11246E8A0800E37C80 /* ResProfileDatum.swift */,
+				4D90BA0F246E896600E37C80 /* UserInfo.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		6E6EC40124507956002AEF26 = {
 			isa = PBXGroup;
 			children = (
 				6E6EC40C24507956002AEF26 /* Wildlife Research Center */,
 				6E6EC40B24507956002AEF26 /* Products */,
+				26D841926AD0780A7D40DFBE /* Pods */,
+				A271E4D5964BA069707C257C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +301,10 @@
 		6E6EC40C24507956002AEF26 /* Wildlife Research Center */ = {
 			isa = PBXGroup;
 			children = (
+				4D90BA06246E85B700E37C80 /* SupportingFiles */,
+				4D90BA02246E7E0F00E37C80 /* Classes */,
+				6E6EC42224507A1E002AEF26 /* Model */,
+				6E6EC42324507A4B002AEF26 /* Controller */,
 				6E6EC40D24507956002AEF26 /* AppDelegate.swift */,
 				6E6EC40F24507956002AEF26 /* SceneDelegate.swift */,
 				6E6EC41124507956002AEF26 /* ViewController.swift */,
@@ -67,6 +316,121 @@
 			path = "Wildlife Research Center";
 			sourceTree = "<group>";
 		};
+		6E6EC42124507985002AEF26 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				6E77B2DF2451616D00C3A110 /* Font */,
+				6E6EC4282450805E002AEF26 /* Constant.swift */,
+				6E6EC42424507C1A002AEF26 /* Singleton.swift */,
+				6E6EC42624507E6B002AEF26 /* UIView+Extention.swift */,
+				6E77B303245188B400C3A110 /* UITextField+Extention.swift */,
+				6E8200272452B8020071EB6D /* UIButton+Extention.swift */,
+				6E820037245313B30071EB6D /* UIViewController+Extention.swift */,
+				6E6EC42A245080D6002AEF26 /* Color.swift */,
+				4D90BA00246E7B7300E37C80 /* Utilities.swift */,
+				4D5BE9C2246ED0E1005FFD0C /* Validator.swift */,
+				6EC8999E24AB14F800C4B502 /* SelectionButton.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		6E6EC42224507A1E002AEF26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D597D38247BF9B400470A07 /* ScentData.swift */,
+				4D597D3A247BFB3A00470A07 /* BrandData.swift */,
+				4D3AB33924813AD600939020 /* SubmitMaster.swift */,
+				6E20F4AE24A70A930065C18E /* AppUser.swift */,
+				6E20F4B024A70C6B0065C18E /* ReportModal.swift */,
+				6E20F4B224A724F40065C18E /* PhotoModal.swift */,
+				6E952C2424A9B2F0004BE31E /* OfflineReportModal.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6E6EC42324507A4B002AEF26 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6E82002C2452C1440071EB6D /* ReportList */,
+				6E8200292452B95F0071EB6D /* Store */,
+				6E77B3052451AFEF00C3A110 /* RetailsReport */,
+				6E77B3002451791700C3A110 /* Login */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6E77B2DF2451616D00C3A110 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				6E77B2EA2451618500C3A110 /* Aileron-Black.otf */,
+				6E77B2EF2451618600C3A110 /* Aileron-BlackItalic.otf */,
+				6E77B2E52451618500C3A110 /* Aileron-Bold.otf */,
+				6E77B2E42451618500C3A110 /* Aileron-BoldItalic.otf */,
+				6E77B2E12451618400C3A110 /* Aileron-Heavy.otf */,
+				6E77B2E62451618500C3A110 /* Aileron-HeavyItalic.otf */,
+				6E77B2E32451618400C3A110 /* Aileron-Italic.otf */,
+				6E77B2EB2451618500C3A110 /* Aileron-Light.otf */,
+				6E77B2E02451618400C3A110 /* Aileron-LightItalic.otf */,
+				6E77B2E22451618400C3A110 /* Aileron-Regular.otf */,
+				6E77B2ED2451618500C3A110 /* Aileron-SemiBold.otf */,
+				6E77B2E92451618500C3A110 /* Aileron-SemiBoldItalic.otf */,
+				6E77B2E72451618500C3A110 /* Aileron-Thin.otf */,
+				6E77B2E82451618500C3A110 /* Aileron-ThinItalic.otf */,
+				6E77B2EE2451618600C3A110 /* Aileron-UltraLight.otf */,
+				6E77B2EC2451618500C3A110 /* Aileron-UltraLightItalic.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		6E77B3002451791700C3A110 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6E77B3012451792D00C3A110 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		6E77B3052451AFEF00C3A110 /* RetailsReport */ = {
+			isa = PBXGroup;
+			children = (
+				6E820031245302E00071EB6D /* RetailReportMainViewController.swift */,
+				6E820033245303160071EB6D /* RetaildReportMainTableViewCell.swift */,
+				6E77B3062451B00C00C3A110 /* RetailReportSecondViewController.swift */,
+				6E77B3082451B34000C3A110 /* RetailReportSecondTableViewCell.swift */,
+				6E77B30A2451CB9A00C3A110 /* RetailReportViewController.swift */,
+				6E820035245311490071EB6D /* RetailReportThirdViewController.swift */,
+				6ED44641245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift */,
+			);
+			path = RetailsReport;
+			sourceTree = "<group>";
+		};
+		6E8200292452B95F0071EB6D /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6E82002A2452B9750071EB6D /* SelectStoreViewController.swift */,
+				4DA3654B247398BC007CB068 /* SelectLocationViewController.swift */,
+				4DA3654D24739C1F007CB068 /* SelectStoreTableViewCell.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		6E82002C2452C1440071EB6D /* ReportList */ = {
+			isa = PBXGroup;
+			children = (
+				6E82002D2452C2390071EB6D /* ReportListViewController.swift */,
+				6E82002F2452CB2B0071EB6D /* ReportListTableViewCell.swift */,
+			);
+			path = ReportList;
+			sourceTree = "<group>";
+		};
+		A271E4D5964BA069707C257C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				571D36F21F434528C9818E01 /* Pods_Wildlife_Research_Center.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +438,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E6EC41E24507957002AEF26 /* Build configuration list for PBXNativeTarget "Wildlife Research Center" */;
 			buildPhases = (
+				BEBE20495E2B65DE26B79D1B /* [CP] Check Pods Manifest.lock */,
 				6E6EC40624507956002AEF26 /* Sources */,
 				6E6EC40724507956002AEF26 /* Frameworks */,
 				6E6EC40824507956002AEF26 /* Resources */,
+				6BC812E55F3A97D7F2C0262B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,13 +491,71 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E77B2FC2451618600C3A110 /* Aileron-UltraLightItalic.otf in Resources */,
+				6E77B2F12451618600C3A110 /* Aileron-Heavy.otf in Resources */,
+				6E77B2FE2451618600C3A110 /* Aileron-UltraLight.otf in Resources */,
+				6E77B2F22451618600C3A110 /* Aileron-Regular.otf in Resources */,
+				6E77B2F92451618600C3A110 /* Aileron-SemiBoldItalic.otf in Resources */,
+				6E77B2FD2451618600C3A110 /* Aileron-SemiBold.otf in Resources */,
 				6E6EC41A24507957002AEF26 /* LaunchScreen.storyboard in Resources */,
+				6E77B2F42451618600C3A110 /* Aileron-BoldItalic.otf in Resources */,
+				6E77B2FF2451618600C3A110 /* Aileron-BlackItalic.otf in Resources */,
+				6E77B2F62451618600C3A110 /* Aileron-HeavyItalic.otf in Resources */,
+				6E77B2FA2451618600C3A110 /* Aileron-Black.otf in Resources */,
+				6E77B2F82451618600C3A110 /* Aileron-ThinItalic.otf in Resources */,
 				6E6EC41724507957002AEF26 /* Assets.xcassets in Resources */,
 				6E6EC41524507956002AEF26 /* Main.storyboard in Resources */,
+				6E77B2F52451618600C3A110 /* Aileron-Bold.otf in Resources */,
+				6E77B2F02451618600C3A110 /* Aileron-LightItalic.otf in Resources */,
+				6E77B2FB2451618600C3A110 /* Aileron-Light.otf in Resources */,
+				6E77B2F72451618600C3A110 /* Aileron-Thin.otf in Resources */,
+				6E77B2F32451618600C3A110 /* Aileron-Italic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6BC812E55F3A97D7F2C0262B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wildlife Research Center/Pods-Wildlife Research Center-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wildlife Research Center/Pods-Wildlife Research Center-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wildlife Research Center/Pods-Wildlife Research Center-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEBE20495E2B65DE26B79D1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Wildlife Research Center-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6E6EC40624507956002AEF26 /* Sources */ = {
@@ -139,8 +563,52 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E6EC41224507956002AEF26 /* ViewController.swift in Sources */,
+				6E77B3092451B34000C3A110 /* RetailReportSecondTableViewCell.swift in Sources */,
+				4D43F099246EAB28002BA9FA /* WebServiceSubClass.swift in Sources */,
+				4D597D3B247BFB3B00470A07 /* BrandData.swift in Sources */,
+				6E6EC42524507C1A002AEF26 /* Singleton.swift in Sources */,
+				6ED44642245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift in Sources */,
+				4DA3654C247398BC007CB068 /* SelectLocationViewController.swift in Sources */,
+				6E8200302452CB2B0071EB6D /* ReportListTableViewCell.swift in Sources */,
+				6E6EC42B245080D6002AEF26 /* Color.swift in Sources */,
+				6E6EC42724507E6B002AEF26 /* UIView+Extention.swift in Sources */,
+				6E820034245303160071EB6D /* RetaildReportMainTableViewCell.swift in Sources */,
+				4D90BA08246E85E100E37C80 /* AppInfo.swift in Sources */,
+				4D48E7D9247D265B006040E4 /* NetworkManager.swift in Sources */,
+				4D90B9FD246E799B00E37C80 /* Method.swift in Sources */,
+				6E20F4B124A70C6B0065C18E /* ReportModal.swift in Sources */,
+				4D90BA12246E8A0800E37C80 /* ResProfileDatum.swift in Sources */,
+				4D5BE9C3246ED0E1005FFD0C /* Validator.swift in Sources */,
+				6E952C2524A9B2F0004BE31E /* OfflineReportModal.swift in Sources */,
+				6E77B3022451792D00C3A110 /* LoginViewController.swift in Sources */,
 				6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */,
 				6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */,
+				6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */,
+				6E82002E2452C2390071EB6D /* ReportListViewController.swift in Sources */,
+				6E77B3072451B00C00C3A110 /* RetailReportSecondViewController.swift in Sources */,
+				4DA3654E24739C1F007CB068 /* SelectStoreTableViewCell.swift in Sources */,
+				4D90BA05246E7E3600E37C80 /* String+Extensions.swift in Sources */,
+				6EC8999F24AB14F800C4B502 /* SelectionButton.swift in Sources */,
+				4D90B9FF246E7AB000E37C80 /* WebServices.swift in Sources */,
+				4D90BA0B246E877A00E37C80 /* Colors.swift in Sources */,
+				6E77B304245188B400C3A110 /* UITextField+Extention.swift in Sources */,
+				4D90BA0D246E881500E37C80 /* UIColor+Extension.swift in Sources */,
+				6E820036245311490071EB6D /* RetailReportThirdViewController.swift in Sources */,
+				4D541B1F247F91440055ADBB /* SubmitReport.swift in Sources */,
+				4D644AC92472AB3300DADDCF /* StoreInfo.swift in Sources */,
+				6E820032245302E00071EB6D /* RetailReportMainViewController.swift in Sources */,
+				6E82002B2452B9750071EB6D /* SelectStoreViewController.swift in Sources */,
+				4D43F09C246EB906002BA9FA /* ResponseInitClass.swift in Sources */,
+				4D3AB33A24813AD600939020 /* SubmitMaster.swift in Sources */,
+				4D90B9F9246E784500E37C80 /* ApiPaths.swift in Sources */,
+				6E20F4AF24A70A930065C18E /* AppUser.swift in Sources */,
+				6E8200282452B8020071EB6D /* UIButton+Extention.swift in Sources */,
+				6E77B30B2451CB9A00C3A110 /* RetailReportViewController.swift in Sources */,
+				4D597D39247BF9B400470A07 /* ScentData.swift in Sources */,
+				6E820038245313B30071EB6D /* UIViewController+Extention.swift in Sources */,
+				4D90BA01246E7B7300E37C80 /* Utilities.swift in Sources */,
+				4D90BA10246E896600E37C80 /* UserInfo.swift in Sources */,
+				6E6EC4292450805E002AEF26 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,10 +750,13 @@
 		};
 		6E6EC41F24507957002AEF26 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACB03E233546D492208D28DA /* Pods-Wildlife Research Center.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LNR2265795;
 				INFOPLIST_FILE = "Wildlife Research Center/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,10 +770,13 @@
 		};
 		6E6EC42024507957002AEF26 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE4222A1C24987AA3ED6D79D /* Pods-Wildlife Research Center.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LNR2265795;
 				INFOPLIST_FILE = "Wildlife Research Center/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

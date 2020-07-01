@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -17,7 +18,70 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+
+        
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        self.window = UIWindow(windowScene: windowScene)
+//        self.window =  UIWindow(frame: UIScreen.main.bounds)
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        var rootVCC : UIViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//
+//
+//        let isUserLoggedin = userDefault.value(forKey: UserDefaultsKey.isStoreSelected.rawValue) as? Bool
+//
+//        if isUserLoggedin != nil {
+//
+//            if isUserLoggedin! {
+//
+//                guard let rootMainVC = storyboard.instantiateViewController(identifier: "RetailReportMainViewController") as? RetailReportMainViewController else {
+//                    print("ViewController not found")
+//                    return
+//                }
+//
+//                rootVCC = rootMainVC
+//
+//            } else {
+//                guard let rootLoginVC = storyboard.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else {
+//                    print("ViewController not found")
+//                    return
+//                }
+//
+//                rootVCC = rootLoginVC
+//            }
+//        }
+//
+//        let rootNC = UINavigationController(rootViewController: rootVCC)
+//        self.window?.rootViewController = rootNC
+//        self.window?.makeKeyAndVisible()
+//
+        
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "RetailReportMainViewController") as! RetailReportMainViewController
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window!.windowScene = windowScene
+        
+        
+        let isUserLoggedin = userDefault.value(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool
+        if isUserLoggedin != nil && isUserLoggedin == true {
+            let mainNC = UINavigationController(rootViewController: mainVC)
+                       window!.rootViewController = mainNC
+            
+        } else {
+           let loginNC = UINavigationController(rootViewController: loginVC)
+           window!.rootViewController = loginNC
+        }
+        
+//        window!.rootViewController = VC
+        window!.makeKeyAndVisible()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window = window
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

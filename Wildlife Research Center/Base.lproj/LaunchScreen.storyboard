@@ -1,10 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Aileron-Bold.otf">
+            <string>Aileron-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -13,13 +19,43 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="aWT-Go-F6P">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="gDt-Tg-eMs">
+                                <rect key="frame" x="0.0" y="80" width="375" height="134"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retail Location - Reporting App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lO5-Y0-GCd">
+                                <rect key="frame" x="10" y="229" width="355" height="28"/>
+                                <fontDescription key="fontDescription" name="Aileron-Bold" family="Aileron" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gDt-Tg-eMs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="1aS-Eg-oq7"/>
+                            <constraint firstAttribute="bottom" secondItem="aWT-Go-F6P" secondAttribute="bottom" id="1pC-jE-uif"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lO5-Y0-GCd" secondAttribute="trailing" constant="10" id="9tn-oN-q8p"/>
+                            <constraint firstItem="aWT-Go-F6P" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Fe4-ZP-Tao"/>
+                            <constraint firstItem="aWT-Go-F6P" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Fom-LI-az8"/>
+                            <constraint firstItem="lO5-Y0-GCd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="R9P-gi-28S"/>
+                            <constraint firstItem="gDt-Tg-eMs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aw4-bB-LcJ"/>
+                            <constraint firstItem="gDt-Tg-eMs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fLw-YT-SNg"/>
+                            <constraint firstAttribute="trailing" secondItem="aWT-Go-F6P" secondAttribute="trailing" id="kH6-O2-9Mc"/>
+                            <constraint firstItem="lO5-Y0-GCd" firstAttribute="top" secondItem="gDt-Tg-eMs" secondAttribute="bottom" constant="15" id="mg7-yn-6A3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchScreen" width="414" height="896"/>
+        <image name="Logo" width="341" height="134"/>
+    </resources>
 </document>
