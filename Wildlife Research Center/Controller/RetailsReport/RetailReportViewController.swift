@@ -81,22 +81,39 @@ class RetailReportViewController: UIViewController {
     
     func setBtnTitles() {
         
-        //Replace 02 with the fill data...
-        
-        
-        btnScentEliminationFacings.setTitle("\(fillData_1)", for: .normal)
+        if fillData_1 == 0 {
+            btnScentEliminationFacings.setTitle("Select", for: .normal)
+        } else {
+            btnScentEliminationFacings.setTitle("\(fillData_1)", for: .normal)
+        }
         p1Index = fillData_1
-    
-        btnScentElimination_PalletDisplays.setTitle("\(fillData_2)", for: .normal)
+        
+        if fillData_2 == 0 {
+             btnScentElimination_PalletDisplays.setTitle("Select", for: .normal)
+        } else {
+            btnScentElimination_PalletDisplays.setTitle("\(fillData_2)", for: .normal)
+        }
         p2Index = fillData_2
         
-        btnScentAndDispenserFacings.setTitle("\(fillData_3)", for: .normal)
+        if fillData_3 == 0 {
+            btnScentAndDispenserFacings.setTitle("Select", for: .normal)
+        } else {
+            btnScentAndDispenserFacings.setTitle("\(fillData_3)", for: .normal)
+        }
         p3Index = fillData_3
         
-        btnScentAndDispenser_PalletDisplays.setTitle("\(fillData_4)", for: .normal)
+        if fillData_4 == 0 {
+            btnScentAndDispenser_PalletDisplays.setTitle("Select", for: .normal)
+        } else {
+            btnScentAndDispenser_PalletDisplays.setTitle("\(fillData_4)", for: .normal)
+        }
         p4Index = fillData_4
         
-        btnExclusiveEndcap.setTitle("\(fillData_5)", for: .normal)
+        if fillData_5 == 0 {
+            btnExclusiveEndcap.setTitle("Select", for: .normal)
+        } else {
+            btnExclusiveEndcap.setTitle("\(fillData_5)", for: .normal)
+        }
         p5Index = fillData_5
         
     }

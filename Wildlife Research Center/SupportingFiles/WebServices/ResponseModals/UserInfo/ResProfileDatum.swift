@@ -48,6 +48,20 @@ class ResProfileDatum : NSObject, NSCoding{
         _tableName = json["_tableName"].stringValue
         
     }
+    
+    init(num: String,createdDate: String,createdByUserNum: String,updatedDate: String,updatedByUserNum: String,dragSortOrder: String,username: String,password: String,full_name: String,email_address: String, rep_group : String) {
+        self.num = num
+        self.createdDate = createdDate
+        self.createdByUserNum = createdByUserNum
+        self.updatedDate = updatedDate
+        self.updatedByUserNum = updatedByUserNum
+        self.dragSortOrder = dragSortOrder
+        self.username = username
+        self.password = password
+        self.full_name = full_name
+        self.email_address = email_address
+        self.rep_group = rep_group
+    }
 
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property

@@ -32,6 +32,9 @@
 		6E20F4AF24A70A930065C18E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4AE24A70A930065C18E /* AppUser.swift */; };
 		6E20F4B124A70C6B0065C18E /* ReportModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B024A70C6B0065C18E /* ReportModal.swift */; };
 		6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B224A724F40065C18E /* PhotoModal.swift */; };
+		6E2FD42524AC9E0300EA16F3 /* DatabaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FD42424AC9E0300EA16F3 /* DatabaseHandler.swift */; };
+		6E2FD42824AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FD42624AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld */; };
+		6E63BD4E24ADDD2D00A05CFC /* MapDealerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */; };
 		6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40D24507956002AEF26 /* AppDelegate.swift */; };
 		6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40F24507956002AEF26 /* SceneDelegate.swift */; };
 		6E6EC41224507956002AEF26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC41124507956002AEF26 /* ViewController.swift */; };
@@ -102,6 +105,9 @@
 		6E20F4AE24A70A930065C18E /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		6E20F4B024A70C6B0065C18E /* ReportModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModal.swift; sourceTree = "<group>"; };
 		6E20F4B224A724F40065C18E /* PhotoModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModal.swift; sourceTree = "<group>"; };
+		6E2FD42424AC9E0300EA16F3 /* DatabaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHandler.swift; sourceTree = "<group>"; };
+		6E2FD42724AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WildlifeResearchCenter.xcdatamodel; sourceTree = "<group>"; };
+		6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDealerData.swift; sourceTree = "<group>"; };
 		6E6EC40A24507956002AEF26 /* Wildlife Research Center.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildlife Research Center.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6EC40D24507956002AEF26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E6EC40F24507956002AEF26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 		4D90BA06246E85B700E37C80 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				6E2FD42324AC9DCF00EA16F3 /* Database */,
 				6E6EC42124507985002AEF26 /* Utility */,
 				4D90B9F4246E76AF00E37C80 /* WebServices */,
 				4D90BA07246E85E100E37C80 /* AppInfo.swift */,
@@ -278,6 +285,15 @@
 				4D90BA0F246E896600E37C80 /* UserInfo.swift */,
 			);
 			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		6E2FD42324AC9DCF00EA16F3 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				6E2FD42624AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld */,
+				6E2FD42424AC9E0300EA16F3 /* DatabaseHandler.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		6E6EC40124507956002AEF26 = {
@@ -344,6 +360,7 @@
 				6E20F4B024A70C6B0065C18E /* ReportModal.swift */,
 				6E20F4B224A724F40065C18E /* PhotoModal.swift */,
 				6E952C2424A9B2F0004BE31E /* OfflineReportModal.swift */,
+				6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -565,6 +582,7 @@
 				6E6EC41224507956002AEF26 /* ViewController.swift in Sources */,
 				6E77B3092451B34000C3A110 /* RetailReportSecondTableViewCell.swift in Sources */,
 				4D43F099246EAB28002BA9FA /* WebServiceSubClass.swift in Sources */,
+				6E2FD42524AC9E0300EA16F3 /* DatabaseHandler.swift in Sources */,
 				4D597D3B247BFB3B00470A07 /* BrandData.swift in Sources */,
 				6E6EC42524507C1A002AEF26 /* Singleton.swift in Sources */,
 				6ED44642245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift in Sources */,
@@ -574,6 +592,7 @@
 				6E6EC42724507E6B002AEF26 /* UIView+Extention.swift in Sources */,
 				6E820034245303160071EB6D /* RetaildReportMainTableViewCell.swift in Sources */,
 				4D90BA08246E85E100E37C80 /* AppInfo.swift in Sources */,
+				6E63BD4E24ADDD2D00A05CFC /* MapDealerData.swift in Sources */,
 				4D48E7D9247D265B006040E4 /* NetworkManager.swift in Sources */,
 				4D90B9FD246E799B00E37C80 /* Method.swift in Sources */,
 				6E20F4B124A70C6B0065C18E /* ReportModal.swift in Sources */,
@@ -583,6 +602,7 @@
 				6E77B3022451792D00C3A110 /* LoginViewController.swift in Sources */,
 				6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */,
 				6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */,
+				6E2FD42824AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld in Sources */,
 				6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */,
 				6E82002E2452C2390071EB6D /* ReportListViewController.swift in Sources */,
 				6E77B3072451B00C00C3A110 /* RetailReportSecondViewController.swift in Sources */,
@@ -810,6 +830,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6E2FD42624AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6E2FD42724AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodel */,
+			);
+			currentVersion = 6E2FD42724AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodel */;
+			path = WildlifeResearchCenter.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6E6EC40224507956002AEF26 /* Project object */;
 }

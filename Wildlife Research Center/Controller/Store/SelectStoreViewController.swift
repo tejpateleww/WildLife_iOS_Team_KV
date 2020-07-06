@@ -57,7 +57,27 @@ class SelectStoreViewController: UIViewController {
         pickerView?.delegate = self
         pickerView?.dataSource = self
         
-        webServiceforLists()
+        //        webServiceforLists()
+        
+        let cityNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Citynames")
+        let stateNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Statenames")
+        let storeNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Storenames")
+        
+        
+        for name in cityNames! {
+            let str = name.value(forKeyPath: "name") as? String
+            self.cityList.append(str!)
+        }
+        
+        for name in stateNames! {
+            let str = name.value(forKeyPath: "name") as? String
+            self.stateList.append(str!)
+        }
+        
+        for name in storeNames! {
+            let str = name.value(forKeyPath: "name") as? String
+            self.storeList.append(str!)
+        }
         
     }
 
@@ -72,6 +92,7 @@ class SelectStoreViewController: UIViewController {
 
         vwbottomSection.clipsToBounds = true
         vwbottomSection.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
     }
     
     

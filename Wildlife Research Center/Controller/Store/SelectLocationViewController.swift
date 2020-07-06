@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreData
 
 class SelectLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -19,14 +20,53 @@ class SelectLocationViewController: UIViewController, UITableViewDelegate, UITab
     var state : String = ""
     var store : String = ""
     
+    var listManagedContext : [NSManagedObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let storeData = userDefault.object(forKey: UserDefaultsKey.storeInfo.rawValue) as? Data else { return }
         guard let storeinfo = try? PropertyListDecoder().decode(StoreInfo.self, from: storeData) else { return }
         
-        webServiceForStoreLists(storeName: store, state: state)
+        if WebService.shared.isConnected {
+            self.webServiceForStoreLists(storeName: store, state: state)
+        } else {
+            fetchStoreDataFromDB()
+        }
         
+        tblView_Stores.allowsSelection = false
+    }
+    
+    func fetchStoreDataFromDB() {
+        let data = DataBaseHandler.sharedManager.fetchListBasedOnPredicate(state: state, store: store)
+        
+        guard data != nil else {
+            self.showAlert(msg: "List not available")
+            return
+        }
+        
+        
+        for eachdata in data! {
+            
+            let title = eachdata.value(forKeyPath: "title") as? String
+            let add = eachdata.value(forKeyPath: "address") as? String
+            let city = eachdata.value(forKeyPath: "city") as? String
+            let state = eachdata.value(forKeyPath: "state") as? String
+            let zip = eachdata.value(forKeyPath: "zip") as? String
+            
+            let store = StoreList(title: title!, address: add!, city: city!, state: state!, zip: zip!)
+            
+            self.storeList.append(store)
+            
+        }
+        
+        if storeList.count < 1 {
+            self.tblView_Stores.isHidden = true
+        } else {
+            self.tblView_Stores.isHidden = false
+        }
+        
+        self.tblView_Stores.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,15 +103,15 @@ class SelectLocationViewController: UIViewController, UITableViewDelegate, UITab
     //MARK:- Api Call
     
     func webServiceForStoreLists(storeName: String, state: String) {
-        
+
         if WebService.shared.isConnected {
             WebServiceSubClass.storeListForStatesAPI(title: storeName, state: state, showhud: true) { (json, success, resp) in
-                
+
                 if success {
                     json["result"].arrayValue.forEach { (eachdict) in
                         self.storeList.append(StoreList(json: eachdict))
                     }
-                    
+
                     if self.storeList.count == 0 {
                         self.tblView_Stores.isHidden = true
                     } else {
@@ -80,15 +120,15 @@ class SelectLocationViewController: UIViewController, UITableViewDelegate, UITab
                     }
                 } else {
                     // if fails
-                    
-                    self.showAlert(msg: json["message"].stringValue)
-                    
+
+                    self.showAlert(msg: "No Store Found")
+
                 }
             }
         } else {
                 self.showAlert(msg: "Internet Not Available")
         }
-        
+
     }
     
     func showAlert(msg: String) {
@@ -124,8 +164,6 @@ extension SelectLocationViewController: SelectStoreTableViewCellDelegate {
     }
     
 }
-
-
 
 //Modal Store Lists :
 
@@ -166,5 +204,13 @@ struct StoreList: Codable {
         self.longitude = json["longitude"].stringValue
         self.store = json["store"].stringValue
         self._tableName = json["_tableName"].stringValue
+    }
+    
+    init(title : String, address : String, city: String, state: String, zip: String) {
+        self.title = title
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zip = zip
     }
 }

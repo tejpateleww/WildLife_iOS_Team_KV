@@ -32,6 +32,12 @@ class UserInfo : NSObject, NSCoding{
         message = json["message"].stringValue
         status = json["status"].boolValue
     }
+    
+    init(resProfileDatum: ResProfileDatum) {
+        self.data = resProfileDatum
+        self.message = "Created Locally"
+        self.status = true
+    }
 
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property

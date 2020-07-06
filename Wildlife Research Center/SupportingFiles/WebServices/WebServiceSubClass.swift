@@ -27,8 +27,12 @@ class WebServiceSubClass{
         WebService.shared.getMethod(api: .AddStoreManually, parameterString: "title=\(store)&state=\(state)&city=\(city)".replaceCharacter(oldCharacter: " ", newCharacter: ""), httpMethod: .get, showHud: showhud, completion: completion)
     }
     
-    class func storeListForStatesAPI( title: String, state: String, showhud: Bool = true, completion: @escaping CompletionResponse) {
-        WebService.shared.getMethod(api: .StoreListForStates, parameterString: "title=\(title)&state=\(state)".replaceCharacter(oldCharacter: " ", newCharacter: "%20") , httpMethod: .get, showHud: showhud, completion: completion)
+    class func storeListForStatesAPI( title: String, state: String, showhud: Bool = false, completion: @escaping CompletionResponse) {
+        
+        let title1 = title.replaceCharacter(oldCharacter: "&", newCharacter: "%26")
+        let str = "title=\(title1)&state=\(state)".replaceCharacter(oldCharacter: " ", newCharacter: "%20")
+        
+        WebService.shared.getMethod(api: .StoreListForStates, parameterString: str , httpMethod: .get, showHud: showhud, completion: completion)
     }
     
     class func imageUploadAPI( image: UIImage, showhud: Bool = true, completion: @escaping CompletionResponse) {
@@ -39,14 +43,13 @@ class WebServiceSubClass{
         
     }
     
-//    class func submitReport( params : [String: Any], showhud: Bool = true, completion: @escaping CompletionResponse ) {
-//
-//        WebService.shared.postMethod(api: .SubmitReports, params: params, httpMethod: .post, showHud: showhud, completion: completion)
-//    }
-    
     class func submit( params: Any, showhud: Bool = true, completion : @escaping CompletionResponse) {
         
         WebService.shared.requestMethod(api: .SubmitReports, httpMethod: .post, showHud: showhud, parameters: params, completion: completion)
+    }
+    
+    class func mapDealers( showhud: Bool = false, completion : @escaping CompletionResponse ) {
+        WebService.shared.getMethod(api: .mapDealers, parameterString: "", httpMethod: .get, showHud: showhud, completion: completion)
     }
     
     

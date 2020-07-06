@@ -54,7 +54,7 @@ class ReportListViewController: UIViewController {
         let userModal = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
         
         for i in 0..<arr_AppUsers.count {
-            if arr_AppUsers[i].emailID == userModal?.data.email_address {
+            if arr_AppUsers[i].emailID == userModal?.data.username {
                 arr_CurrentUser_OfflineReports = arr_AppUsers[i].arr_OfflineReports
             }
         }

@@ -83,4 +83,5 @@ enum ApiKey: String {
     case AddStoreManually      = "add_map_dealer.php?"
     case SubmitReports         = "report_submissions.php"
     case imageUpload           = "image_upload.php"
+    case mapDealers            = "map_dealers.php"
 }

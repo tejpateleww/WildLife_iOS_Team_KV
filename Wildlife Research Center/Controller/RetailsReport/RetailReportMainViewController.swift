@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RetailReportMainViewController: UIViewController {
     
@@ -24,6 +25,9 @@ class RetailReportMainViewController: UIViewController {
     //MARK:- Properties
     var retailStoreQuestions_Array = [RetailsStoreQuestion]()
     var comesAfterSubmission : Bool = false
+    
+    
+    var currentUserDetails : NSManagedObject!
 
     //MARK:- Life Cycle
     override func viewDidLoad() {
@@ -44,6 +48,13 @@ class RetailReportMainViewController: UIViewController {
                    RetailsStoreQuestion(title: "Did you leave SEP's?", isOn: false),
                    RetailsStoreQuestion(title: "Did you work on event?", isOn: false)
                   ]
+        
+        
+        // get details from user defaults. Match the user in local DB , Make him current user and Fetch all his current REport Details
+        getUserDetails()
+        
+        
+       // Stuff if the store is selected.
         
         let isStoreSelected = userDefault.value(forKey: UserDefaultsKey.isStoreSelected.rawValue) as? Bool
         if isStoreSelected != nil && isStoreSelected! {
@@ -66,12 +77,7 @@ class RetailReportMainViewController: UIViewController {
             }
         }
         
-        //Fetch User Profile and fill textfields
-        let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
-        let UserModal = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
-        txtName.text = UserModal?.data.full_name ?? ""
-        txtEmail.text = UserModal?.data.email_address ?? ""
-        txtReqGroup.text = UserModal?.data.rep_group ?? ""
+        
         
         tableView.tableFooterView = UIView()
         tableView.sizeToFit()
@@ -80,7 +86,7 @@ class RetailReportMainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavBarWithMenuORBack(Title: "Report Report", leftButton: "menu", IsNeedRightButton: true, isTranslucent: false)
+        setNavBarWithMenuORBack(Title: "Retail Report", leftButton: "menu", IsNeedRightButton: true, isTranslucent: false)
         mainScrollView.contentOffset = .zero
         
         btnNext.layoutSubviews()
@@ -230,5 +236,61 @@ struct RetailsStoreQuestion : Codable {
         self.Title = title
         self.isOn = isOn
     }
+}
+
+extension RetailReportMainViewController {
+    
+    // Get User Details from the user Defaults by unarchieving and Match the User Details in the DB ... and make the user as current user + get all the current Data for that user..
+    func getUserDetails() {
+        
+        
+        //Fetch User Profile and fill textfields
+        let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
+        let userDetails = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
+        
+        //Set the textfields
+        txtName.text = userDetails?.data.full_name ?? ""
+        txtEmail.text = userDetails?.data.email_address ?? ""
+        txtReqGroup.text = userDetails?.data.rep_group ?? ""
+        
+        //Fetch all the user Data from the DB
+        let allUserData = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "User")
+    
+        //match and make the current user which is in the user defaults.
+        
+        for user in allUserData! {
+            
+            if user.value(forKeyPath: "username") as? String == userDetails?.data.username {
+                // Make this user the current user
+                user.setValue(true, forKeyPath: "isCurrentUser")
+                
+            } else {
+                //Make all other users Non Current
+                user.setValue(false, forKeyPath: "isCurrentUser")
+            }
+        }
+        
+        // Save the context/ Changes
+        DataBaseHandler.sharedManager.saveContext()
+        
+//        self.currentUserDetails = DataBaseHandler.sharedManager.fetchCurrentUserData()
+        
+//        currentUserDetails.value(forKeyPath: "")
+        
+        
+        retailStoreQuestions_Array = [RetailsStoreQuestion(title: "Were wildlife products set-Up in store?", isOn: false),
+         RetailsStoreQuestion(title: "Were our products priced?", isOn: false),
+         RetailsStoreQuestion(title: "If not, did you ask someone to price them?", isOn: false),
+         RetailsStoreQuestion(title: "Were our products displayed correctly?", isOn: false),
+         RetailsStoreQuestion(title: "Did you discuss any issues with store personnel?", isOn: false),
+         RetailsStoreQuestion(title: "Did you do product training?", isOn: false),
+         RetailsStoreQuestion(title: "Did you leave SEP's?", isOn: false),
+         RetailsStoreQuestion(title: "Did you work on event?", isOn: false)
+        ]
+        
+        
+    }
+    
+    
 }
  

@@ -545,7 +545,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                 
                 // 3. Add the newly created Offline Report to -> the Array of offline reports OF -> The Current User (Matched using Email)
                 for i in 0..<arr_AppUsers!.count {
-                    if arr_AppUsers![i].emailID == userModal?.data.email_address {
+                    if arr_AppUsers![i].emailID == userModal?.data.username {
                         arr_AppUsers![i].arr_OfflineReports.append(new_offline_Report)
                     }
                 }

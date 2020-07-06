@@ -93,15 +93,20 @@ class WebService {
         }
     }
     
+   
+    
     
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
         guard isConnected else { completion(JSON(), false, ""); return }
         
-        guard let url = URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
+        guard let url = URL(string: (APIEnvironment.baseURL + api.rawValue + parameterString)) else {
             completion(JSON(),false, "")
             return
         }
+        
+        
+        //.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         
         
         var headers = APIEnvironment.headers
@@ -112,6 +117,12 @@ class WebService {
 //        }
         
         print("the url is \(url) and the parameters are \n \(parameterString) and the headers are \(headers)")
+//        
+//        if (APIEnvironment.baseURL + api.rawValue) == "http://wildlife.excellentwebworld.in/location_result.php?" {
+//            let str = (APIEnvironment.baseURL + api.rawValue + parameterString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+//           
+//        }
+        
         if(showHud)
         {
             Utilities.showHud()
@@ -126,7 +137,7 @@ class WebService {
                 }
                 if let json = response.value{
                     let resJson = JSON(json)
-                    print("the response is \(resJson)")
+//                    print("the response is \(resJson)")
                     
                     if "\(url)".contains("geocode/json?latlng=") {
                         
@@ -136,6 +147,7 @@ class WebService {
                     }
                     else {
                         let status = resJson["success"].boolValue
+                        
                         completion(resJson, status,json)
                     }
                 }
