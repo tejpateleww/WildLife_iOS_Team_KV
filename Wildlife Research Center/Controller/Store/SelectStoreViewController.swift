@@ -57,28 +57,85 @@ class SelectStoreViewController: UIViewController {
         pickerView?.delegate = self
         pickerView?.dataSource = self
         
-        //        webServiceforLists()
+        print("City List Count: \(cityList.count)")
+        print("Store List Count: \(storeList.count)")
+        print("State List Count: \(stateList.count)")
         
         let cityNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Citynames")
         let stateNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Statenames")
         let storeNames = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "Storenames")
         
-        
+        var tempCityArr : [String] = []
         for name in cityNames! {
             let str = name.value(forKeyPath: "name") as? String
-            self.cityList.append(str!)
+            tempCityArr.append(str!)
         }
         
+        var tempStateArr : [String] = []
         for name in stateNames! {
             let str = name.value(forKeyPath: "name") as? String
-            self.stateList.append(str!)
+            tempStateArr.append(str!)
         }
         
+        var tempStoreArr : [String] = []
         for name in storeNames! {
             let str = name.value(forKeyPath: "name") as? String
-            self.storeList.append(str!)
+            tempStoreArr.append(str!)
         }
         
+        tempCityArr = tempCityArr.sorted()
+        tempStateArr = tempStateArr.sorted()
+        tempStoreArr = tempStoreArr.sorted()
+        
+        for i in 0..<tempCityArr.count {
+            self.cityList.append(tempCityArr[i])
+        }
+        
+        for i in 0..<tempStateArr.count {
+            self.stateList.append(tempStateArr[i])
+        }
+        
+        for i in 0..<tempStoreArr.count {
+            self.storeList.append(tempStoreArr[i])
+        }
+        
+        
+        let isStoreSelected = userDefault.value(forKey: UserDefaultsKey.isStoreSelected.rawValue) as? Bool
+        if isStoreSelected != nil && isStoreSelected! {
+            
+            guard let storeData = userDefault.object(forKey: UserDefaultsKey.storeInfo.rawValue) as? Data else { return }
+            guard let storeinfo = try? PropertyListDecoder().decode(StoreInfo.self, from: storeData) else { return }
+            
+            if storeinfo.isStoreAddedManually! {
+                self.btnStoreName_Manually.setTitle(storeinfo.storeName, for: .normal)
+                self.btnStateName_Manually.setTitle(storeinfo.stateName, for: .normal)
+                self.btnCityName_Manually.setTitle(storeinfo.cityName, for: .normal)
+                
+                selectedValue_3 = storeinfo.storeName
+                selectedValue_4 = storeinfo.stateName
+                selectedValue_5 = storeinfo.cityName
+                
+                if self.btnStoreName_Manually.currentTitle! != "Select" && self.btnStateName_Manually.currentTitle! != "Select" && self.btnCityName_Manually.currentTitle != "Select"  {
+                    self.ChangeThemeFor_btn_UseThisStore()
+                } else {
+                    self.reset_btnUseThisStore()
+                }
+                
+            } else {
+                self.btnStateName.setTitle(storeinfo.stateName, for: .normal)
+                self.btnStoreName.setTitle(storeinfo.storeName, for: .normal)
+                
+                selectedValue_1 = storeinfo.storeName
+                selectedValue_2 = storeinfo.stateName
+                
+                if self.btnStoreName.currentTitle! != "Select" && self.btnStateName.currentTitle != "Select" {
+                    self.ChangeThemeFor_btn_GetListOfStore()
+                } else {
+                    self.reset_btnGetListOfStore()
+                }
+                
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -357,25 +414,25 @@ class SelectStoreViewController: UIViewController {
             // In offline Mode : Bring the Data stored in User Defaults from the previous calls..
             
             guard let storeNameData = userDefault.object(forKey: UserDefaultsKey.storeNames.rawValue) as? Data else {
-                 self.showAlert(msg: "No Internet Connectivity")
+                 self.showAlert(msg: "Internet connection appears to be offline")
                 return }
             guard let finalStoreList = try? PropertyListDecoder().decode(Array<String>.self, from: storeNameData) else { return }
             self.storeList = finalStoreList
             
             guard let stateNameData = userDefault.object(forKey: UserDefaultsKey.stateNames.rawValue) as? Data else {
-                self.showAlert(msg: "No Internet Connectivity")
+                self.showAlert(msg: "Internet connection appears to be offline")
                 return }
             guard let finalStateList = try? PropertyListDecoder().decode(Array<String>.self, from: stateNameData) else { return }
             self.stateList = finalStateList
             
             guard let cityNameData = userDefault.object(forKey: UserDefaultsKey.cityNames.rawValue) as? Data else {
-                self.showAlert(msg: "No Internet Connectivity")
+                self.showAlert(msg: "Internet connection appears to be offline")
                 return }
             guard let finalCityList = try? PropertyListDecoder().decode(Array<String>.self, from: cityNameData) else { return }
             self.cityList = finalCityList
             
             if self.storeList.count < 3 && self.stateList.count < 3 && self.cityList.count < 3 {
-                self.showAlert(msg: "No Internet Connectivity")
+                self.showAlert(msg: "Internet connection appears to be offline")
                 
             }
         }
@@ -507,24 +564,24 @@ extension SelectStoreViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     // helper funcs for custom btn :
     func ChangeThemeFor_btn_UseThisStore() {
-            btnUseThisStore.isGrayButton = false
-            btnUseThisStore.awakeFromNib()
+//            btnUseThisStore.isGrayButton = false
+//            btnUseThisStore.awakeFromNib()
     }
     
     func ChangeThemeFor_btn_GetListOfStore() {
         
-        btnGetListOfStores.isGrayButton = false
-        btnGetListOfStores.awakeFromNib()
+//        btnGetListOfStores.isGrayButton = false
+//        btnGetListOfStores.awakeFromNib()
     }
     
     func reset_btnUseThisStore() {
-        btnUseThisStore.isGrayButton = true
-        btnUseThisStore.awakeFromNib()
+//        btnUseThisStore.isGrayButton = true
+//        btnUseThisStore.awakeFromNib()
     }
     
     func reset_btnGetListOfStore() {
-        btnGetListOfStores.isGrayButton = true
-        btnGetListOfStores.awakeFromNib()
+//        btnGetListOfStores.isGrayButton = true
+//        btnGetListOfStores.awakeFromNib()
     }
     
 }

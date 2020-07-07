@@ -24,14 +24,6 @@ class RetailReportSecondViewController: UIViewController {
                     "Nose Jammer",
                     "Other"]
     
-    let a = "Wildlife Research Center"
-    let b = "Tink's / Dead Down Wind"
-    let c = "Hunter's Specialties/ Buck Bomb"
-    let b3 = "Code Blue"
-    let b4 = "Conquest"
-    let b5 = "Nose Jammer"
-    let b6 = "Other"
-    
     var brandArr : [BrandData] = []
     
     
@@ -39,31 +31,22 @@ class RetailReportSecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in 0..<7 {
-            let data = BrandData(id: i+1, brandName: aryData[i], scentData: ScentData(scent_Elimination_Facings: 0, scent_Elimination_Pallet_Displays: 0, scent_And_Dispenser_Facings: 0, scent_And_Dispenser_Pallet_Displays: 0, does_this_Brand_have_An_Exclusive_EndCap: 0), allSubmitted: false)
-            
-            self.brandArr.append(data)
-        }
-        
         let brandarr = userDefault.object(forKey: UserDefaultsKey.brandArr.rawValue) as? Data
-        if brandarr != nil {
-            let brandar = try? PropertyListDecoder().decode(Array<BrandData>.self, from: brandarr!)
-            self.brandArr = brandar!
-        }
+               if brandarr != nil {
+                   let brandar = try? PropertyListDecoder().decode(Array<BrandData>.self, from: brandarr!)
+                   self.brandArr = brandar!
+               }
         
-        let brandData = userDefault.object(forKey: UserDefaultsKey.brandData.rawValue) as? Data
-        if brandData != nil {
-            let brandInfo = try? PropertyListDecoder().decode(BrandData.self, from: brandData!)
-            
-            for i in 0..<brandArr.count {
-                if brandArr[i].brandName == brandInfo?.brandName {
-                    brandArr[i] = brandInfo!
-                }
+        if brandArr.count == 0 {
+            for i in 0..<7 {
+                let data = BrandData(id: i+1, brandName: aryData[i], scentData: ScentData(scent_Elimination_Facings: 0, scent_Elimination_Pallet_Displays: 0, scent_And_Dispenser_Facings: 0, scent_And_Dispenser_Pallet_Displays: 0, does_this_Brand_have_An_Exclusive_EndCap: 0), allSubmitted: false)
+                
+                self.brandArr.append(data)
             }
+            
+            let arrdata = try? PropertyListEncoder().encode(brandArr)
+            userDefault.set(arrdata, forKey: UserDefaultsKey.brandArr.rawValue)
         }
-        
-        let arrdata = try? PropertyListEncoder().encode(brandArr)
-        userDefault.set(arrdata, forKey: UserDefaultsKey.brandArr.rawValue)
         
         setNavBarWithMenuORBack(Title: "Retail Report", leftButton: "back", IsNeedRightButton: true, isTranslucent: false)
         tableView.separatorStyle = .none
@@ -74,6 +57,8 @@ class RetailReportSecondViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         constantHeightOfTableView.constant = tableView.contentSize.height
+        
+        self.tableView.reloadData()
         
     }
     
@@ -86,17 +71,6 @@ class RetailReportSecondViewController: UIViewController {
             self.brandArr = brandar!
         }
         
-        let brandData = userDefault.object(forKey: UserDefaultsKey.brandData.rawValue) as? Data
-        if brandData != nil {
-            let brandInfo = try? PropertyListDecoder().decode(BrandData.self, from: brandData!)
-            
-            for i in 0..<brandArr.count {
-                if brandArr[i].brandName == brandInfo?.brandName {
-                    brandArr[i] = brandInfo!
-                }
-            }
-        }
-        
         var isEnabled : Bool = false
         brandArr.forEach { (data) in
             if data.allSubmitted == true {
@@ -107,9 +81,6 @@ class RetailReportSecondViewController: UIViewController {
             btnNext.isGrayButton = false
             btnNext.awakeFromNib()
         }
-        
-        let arrdata = try? PropertyListEncoder().encode(brandArr)
-        userDefault.set(arrdata, forKey: UserDefaultsKey.brandArr.rawValue)
 
         self.tableView.reloadData()
     }
@@ -118,19 +89,22 @@ class RetailReportSecondViewController: UIViewController {
     
     @IBAction func nextBtnPressed(_ sender: ThemeButton) {
         
-        var atleastOneSelected = false
-        self.brandArr.forEach { (brand) in
-            if brand.allSubmitted == true {
-                atleastOneSelected = true
-            }
-        }
+//        var atleastOneSelected = false
+//        self.brandArr.forEach { (brand) in
+//            if brand.allSubmitted == true {
+//                atleastOneSelected = true
+//            }
+//        }
         
-        if atleastOneSelected {
+//        if atleastOneSelected {
+        
+        
+        
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RetailReportThirdViewController") as! RetailReportThirdViewController
-                   self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            Utilities.displayAlert("You must fill details of atleast one brand to submit your report")
-        }
+            self.navigationController?.pushViewController(vc, animated: true)
+//        } else {
+//            Utilities.displayAlert("You must fill details of atleast one brand to submit your report")
+//        }
        
     }
 }
@@ -139,7 +113,7 @@ class RetailReportSecondViewController: UIViewController {
 extension RetailReportSecondViewController: UITableViewDataSource, UITableViewDelegate {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return brandArr.count
+        return aryData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,8 +121,14 @@ extension RetailReportSecondViewController: UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "RetailReportSecondTableViewCell", for: indexPath) as! RetailReportSecondTableViewCell
         cell.selectionStyle = .none
         
-        let info = brandArr[indexPath.row]
-        cell.setData(info)
+        cell.setData(aryData[indexPath.row])
+        
+        brandArr.forEach { (brand) in
+            if brand.brandName == aryData[indexPath.row] {
+                cell.setData(brand)
+            }
+        }
+        
         cell.btnResearch.setNeedsLayout()
 //        cell.btnResearch.layoutSubviews()
 //        cell.layoutSubviews()
@@ -160,7 +140,8 @@ extension RetailReportSecondViewController: UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "RetailReportViewController") as! RetailReportViewController
         
-        vc.brandName = brandArr[indexPath.row].brandName
+//        vc.brandName = brandArr[indexPath.row].brandName
+        vc.brandName = aryData[indexPath.row]
         vc.brandID = (indexPath.row + 1)
         
         // To Display the Data on next page if available

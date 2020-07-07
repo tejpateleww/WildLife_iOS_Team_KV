@@ -76,7 +76,7 @@ extension UIViewController {
         
         let alert = UIAlertController(title: AppInfo.appName, message: "Are you sure you want to log out?", preferredStyle: UIAlertController.Style.alert)
                
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             userDefault.removeObject(forKey: UserDefaultsKey.userProfile.rawValue)
                     userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
                     

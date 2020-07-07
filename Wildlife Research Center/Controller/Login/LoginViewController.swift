@@ -24,8 +24,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        txtUserName.text = "mayur"
-        txtPassWord.text = "mayur"
+        //Testing:
+//        txtUserName.text = "mayur"
+//        txtPassWord.text = "mayur"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,9 +49,7 @@ class LoginViewController: UIViewController {
         }
         
         if WebService.shared.isConnected {
-            
             webServiceForLogin()
-            
         } else { // Offline Mode
             
             //check if there are any users in local DB with matching credentials -> if found then we can login using those credentials and save those credentials in singleton and userdefaults.
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
                 
                 // if thrs r no users in the managed context
                 guard arrUsers_ManagedContext.count > 0 else {
-                    Utilities.displayAlert("No Internet Connectivity")
+                    Utilities.displayAlert("Internet connection appears to be offline")
                     return
                 }
                 
@@ -124,19 +124,10 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func showAlert()
-    {
-        let alert = UIAlertController(title: AppInfo.appName, message: "Username or Password can not be empty", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    
     
     //MARK:- API Calls
     
-    func webServiceForLogin()
+    func webServiceForLogin() //Online Mode
     {
         guard let userName = txtUserName.text, userName != "" else {
             Utilities.displayAlert("Attention!", message: "Username Can not be empty")
@@ -156,7 +147,7 @@ class LoginViewController: UIViewController {
                 userDefault.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 userDefault.synchronize()
                 
-                // 2. Fill the Local Modal for Current User and save it to user defaults by archiving it.
+                // 2. Fill the Local Modal for Current User and save it to user defaults.
                 let userDetails = UserInfo(fromJson: json)
                 let encodedData = try! NSKeyedArchiver.archivedData(withRootObject: userDetails, requiringSecureCoding: false)
                 userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
@@ -165,7 +156,7 @@ class LoginViewController: UIViewController {
                 SingletonClass.sharedInstance.UserId = userDetails.data.num
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = userDetails
                 
-                // 4. Add a user to the DB Only if he doesnt already exist in the DB.
+                // 4. Add a user to the DB Only if he doesnt already exist in the DB:
                 
                 // fetch all users
                 let arrOfAllUsers_ManagedObject = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "User")!
@@ -186,15 +177,14 @@ class LoginViewController: UIViewController {
                 
                 // if he doesnt exist, add the user into the database
                 if !userExists_InDB {
+                    //current user data will be fetched from singleton inside the below function and current user will be created in the DB
                     DataBaseHandler.sharedManager.saveCurrentUserInDB()
                 }
                 
                 
-                // 5.
+                // 0. The OLd Way Before Core Data was Used : the same above process but with a local modal saved in user defaults.
                 
-                //old Code:
-                
-                // to Maintain a list of all Users :
+                // To Maintain a list of all Users :
                 var arr_AppUsers : [AppUser]!
                 
                 let arrAppUsers_Data = userDefault.object(forKey: UserDefaultsKey.appUsers.rawValue) as? Data
@@ -205,12 +195,10 @@ class LoginViewController: UIViewController {
                 }
                 
                 var existingUser : Bool = false
-                
                 for i in 0..<arr_AppUsers.count {
                     if arr_AppUsers[i].emailID == userDetails.data.username {
                         existingUser = true
                     } else {
-                        
                         existingUser = false
                     }
                 }
@@ -225,7 +213,8 @@ class LoginViewController: UIViewController {
                 userDefault.set(finalData, forKey: UserDefaultsKey.appUsers.rawValue)
                 
                 
-                // 6 Push to Main vc.
+                
+                // 6 In the End:
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let retailreportvc = storyboard.instantiateViewController(withIdentifier: "RetailReportMainViewController") as! RetailReportMainViewController
                 self.navigationController?.pushViewController(retailreportvc, animated: true)

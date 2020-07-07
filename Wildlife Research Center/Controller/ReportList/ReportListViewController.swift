@@ -22,7 +22,6 @@ class ReportListViewController: UIViewController {
     
     var arr_CurrentUser_OfflineReports : [OfflineReportModal] = []
     
-    
     var submitsToSync_Arr : [SubmitMaster]?
     var apiCallCount = 0
     
@@ -33,8 +32,6 @@ class ReportListViewController: UIViewController {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
@@ -59,19 +56,17 @@ class ReportListViewController: UIViewController {
             }
         }
         
+        tableView.reloadData()
+        
         // Hide Show Tableview
         if arr_CurrentUser_OfflineReports.count == 0 {
             tableView.isHidden = true
             btnSync.isHidden = true
-            
             lbl_No_Reports_Available_To_Sync.isHidden = false
-            
         } else {
             tableView.isHidden = false
             btnSync.isHidden = false
-            
             lbl_No_Reports_Available_To_Sync.isHidden = true
-            tableView.reloadData()
         }
     }
     
@@ -108,7 +103,9 @@ class ReportListViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
             
         } else {
-            Utilities.displayAlert("Internet Connectivity unavailable")
+//            Utilities.displayAlert("Internet Connectivity unavailable")
+            
+            Utilities.showAlert(AppInfo.appName, message: "Internet connection appears to be offline", vc: self)
         }
     }
     
@@ -117,11 +114,14 @@ class ReportListViewController: UIViewController {
 extension ReportListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if arr_CurrentUser_OfflineReports != nil {
-            return arr_CurrentUser_OfflineReports.count
-        } else {
-            return 0
-        }
+//        if arr_CurrentUser_OfflineReports != nil {
+//            return arr_CurrentUser_OfflineReports.count
+//        } else {
+//            return 0
+//        }
+        return arr_CurrentUser_OfflineReports.count
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,7 +163,7 @@ extension ReportListViewController: UITableViewDelegate, UITableViewDataSource {
                 userDefault.set(appUsersData, forKey: UserDefaultsKey.appUsers.rawValue)
                 
                 if self.arr_AppUsers.count == 0 {
-                    self.lbl_No_Reports_Available_To_Sync.isHidden = false
+//                    self.lbl_No_Reports_Available_To_Sync.isHidden = false
                 }
                 
                 self.tableView.reloadData()
@@ -188,13 +188,16 @@ extension ReportListViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: API CALLs:
 extension ReportListViewController {
-
+    
     func uploadImages() {
+        
+        Utilities.showHud()
+        
         
         for i in 0..<arr_CurrentUser_OfflineReports.count {
             
             imgWaitingTime_DispatchGroup.enter()
-        
+            
             if arr_CurrentUser_OfflineReports[i].imgArr.count > 0 {
                 
                 let paramData = arr_CurrentUser_OfflineReports[i].paramsDict
@@ -203,7 +206,7 @@ extension ReportListViewController {
                 for j in 0..<arr_CurrentUser_OfflineReports[i].imgArr.count {
                     imgUploads_DispatchGroup.enter()
                     // WebService Call
-                    WebServiceSubClass.imageUploadAPI(image: UIImage(data: arr_CurrentUser_OfflineReports[i].imgArr[j].img_inDataForm!)!, showhud: true) { (json, success, resp) in
+                    WebServiceSubClass.imageUploadAPI(image: UIImage(data: arr_CurrentUser_OfflineReports[i].imgArr[j].img_inDataForm!)!, showhud: false) { (json, success, resp) in
                         if success {
                             //json["result"].stringValue
                             
@@ -220,8 +223,8 @@ extension ReportListViewController {
                     }
                 }
                 
-//                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
-//                arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
+                //                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
+                //                arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
                 
                 imgWaitingTime_DispatchGroup.leave()
                 
@@ -251,31 +254,29 @@ extension ReportListViewController {
         
         submit_DispatchGroup.notify(queue: DispatchQueue.main, execute: {
             
-//            clear all the reports Data for the current user.
-            
-            let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
-            let userModal = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
             
             
-            for i in 0..<self.arr_AppUsers.count {
-                if self.arr_AppUsers[i].emailID == userModal?.data.email_address! {
-                    self.arr_AppUsers[i].arr_OfflineReports = []
-                }
-            }
+            //            clear all the reports Data for the current user.
             
-            let finalData = try? PropertyListEncoder().encode(self.arr_AppUsers)
-            userDefault.set(finalData, forKey: UserDefaultsKey.appUsers.rawValue)
-            
-            self.arr_CurrentUser_OfflineReports.removeAll()
-            self.tableView.reloadData()
-            
-            self.lbl_No_Reports_Available_To_Sync.isHidden = false
-            
-            self.btnSync.isHidden = true
+            //            self.btnSync.isHidden = true
+            //
+            //                                       if self.arr_CurrentUser_OfflineReports.count == 0 {
+            //                                           self.tableView.isHidden = false
+            //                                       } else {
+            //                                           self.tableView.isHidden = true
+            //                                       }
             
             
-            Utilities.displayAlert("All Reports Submitted")
-//            print("All Reports Submitted")
+            Utilities.showAlert(AppInfo.appName, message: "All Reports Submitted", vc: self)
+            
+            
+            //            Utilities.displayAlert("All Reports Submitted")
+            //
+            //            Utilities.showAlert(AppInfo.appName, message: "All Reports Submitted", vc: self)
+            
+            
+            
+            //            print("All Reports Submitted")
         })
         
     }
@@ -285,15 +286,46 @@ extension ReportListViewController {
     
     func submitAPI(paramModal: [String:Any] ) {
         
-        WebServiceSubClass.submit(params: paramModal as Any, showhud: true) { (json, success, resp) in
+        WebServiceSubClass.submit(params: paramModal as Any, showhud: false) { (json, success, resp) in
             
             if success {
+                
+                Utilities.hideHud()
                 //clear modal stored in submit master ... and user defaults
+                
+                let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
+                let userModal = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
+                
+                
+                for i in 0..<self.arr_AppUsers.count {
+                    if self.arr_AppUsers[i].emailID == userModal?.data.username! {
+                        self.arr_AppUsers[i].arr_OfflineReports = []
+                    }
+                }
+                
+                let finalData = try? PropertyListEncoder().encode(self.arr_AppUsers)
+                userDefault.set(finalData, forKey: UserDefaultsKey.appUsers.rawValue)
+                
+                self.arr_CurrentUser_OfflineReports.removeAll()
+                self.tableView.reloadData()
+                
+                //            self.lbl_No_Reports_Available_To_Sync.isHidden = false
+                
+                self.btnSync.isHidden = true
+                self.lbl_No_Reports_Available_To_Sync.isHidden = false
+                
+                if self.arr_CurrentUser_OfflineReports.count == 0 {
+                    self.tableView.isHidden = true
+                } else {
+                    self.tableView.isHidden = false
+                }
+                
+                
                 
             }
             self.submit_DispatchGroup.leave()
         }
-
+        
     }
 }
 

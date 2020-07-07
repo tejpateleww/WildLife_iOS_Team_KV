@@ -12,7 +12,6 @@ class RetailReportThirdCollectionViewCell: UICollectionViewCell {
     
     var isRemoved: (() -> Void)?
     
-    
     @IBOutlet weak var imgPicked: UIImageView!
     @IBOutlet weak var btnRemove: UIButton!
     

@@ -126,7 +126,7 @@ class SelectLocationViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         } else {
-                self.showAlert(msg: "Internet Not Available")
+                self.showAlert(msg: "Internet connection appears to be offline")
         }
 
     }

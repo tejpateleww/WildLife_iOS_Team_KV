@@ -59,6 +59,8 @@ class DataBaseHandler {
         return nil
     }
     
+    
+    
     func fetchCurrentUserData() -> NSManagedObject? {
         
         let managedContext = DataBaseHandler.sharedManager.persistentContainer.viewContext
@@ -158,11 +160,11 @@ class DataBaseHandler {
         SingleDealer.setValue(modal.longitude, forKeyPath: "longitude")
         SingleDealer.setValue(modal.store, forKeyPath: "store")
         
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+//        do {
+//            try managedContext.save()
+//        } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
     }
     
     
@@ -193,11 +195,11 @@ class DataBaseHandler {
         
         SingleCityName.setValue(str, forKeyPath: "name")
         
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+//        do {
+//            try managedContext.save()
+//        } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
     }
     
     
@@ -208,11 +210,11 @@ class DataBaseHandler {
         
         SingleStateName.setValue(str, forKeyPath: "name")
         
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+//        do {
+//            try managedContext.save()
+//        } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
     }
     
     func saveStoreNames(str: String) {
@@ -222,11 +224,11 @@ class DataBaseHandler {
         
         SingleStoreName.setValue(str, forKeyPath: "name")
         
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+//        do {
+//            try managedContext.save()
+//        } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
     }
     
     
@@ -260,18 +262,13 @@ class DataBaseHandler {
         do {
             let allData = try managedContext.fetch(fetchRequest)
             return allData
-            
+
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         return nil
         
-        
-        
-        
     }
-    
-    
     
 }
 

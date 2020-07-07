@@ -23,12 +23,7 @@ class RetailReportSecondTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func setData(_ currentData: String) {
-        btnResearch.setTitle(currentData, for: .normal)
-        unHighlight()
-    }
-    
+        
     func setData(_ brandInfo: BrandData) {
         btnResearch.setTitle(brandInfo.brandName, for: .normal)
         
@@ -40,9 +35,16 @@ class RetailReportSecondTableViewCell: UITableViewCell {
         
     }
     
+    func setData(_ currentData: String) {
+        btnResearch.setTitle(currentData, for: .normal)
+        unHighlight()
+    }
+    
+    
     func highlight() {
         btnResearch.layoutSubviews()
         btnResearch.backgroundColor = UIColor.appColor(.highlitedGreen)
+//        btnResearch.backgroundColor = UIColor(red: 92/254, green: 148/254, blue: 68/254, alpha: 1)
         btnResearch.setTitleColor(UIColor.white, for: .normal)
         iconArraw.image = #imageLiteral(resourceName: "arrawWhite")
         

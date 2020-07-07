@@ -175,7 +175,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DataBaseHandler.sharedManager.deleteMapDealerData()
         
         
-        WebServiceSubClass.mapDealers { (json, success, resp) in
+        WebServiceSubClass.mapDealers(showhud: true) { (json, success, resp) in
             
             if success {
                 

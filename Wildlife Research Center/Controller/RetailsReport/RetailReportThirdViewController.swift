@@ -22,7 +22,6 @@ class RetailReportThirdViewController: UIViewController {
     @IBOutlet weak var vwForCollection_HeightConstraint: NSLayoutConstraint!
     
     
-    
     //MARK:- Properties
     var aryData = ["","","","","",""]
     var arr_OfImages : [UIImage] = []
@@ -169,6 +168,14 @@ class RetailReportThirdViewController: UIViewController {
     @IBAction func submitBtnClicked(_ sender: ThemeButton) {
         webServiceSubmit()
     }
+    
+    @IBAction func btnTapAction_HowtoCountFacings(_ sender: UIButton) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "HelpVC") as! HelpVC
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
 }
 
 
@@ -477,8 +484,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         
         params["comments"] = commentTxt.trimmedString
         
-        
-        
         print(params)
         
         if WebService.shared.isConnected {
@@ -559,6 +564,8 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                 userDefault.set(false, forKey: UserDefaultsKey.isStoreSelected.rawValue)
                 userDefault.removeObject(forKey: UserDefaultsKey.brandArr.rawValue)
                 userDefault.removeObject(forKey: UserDefaultsKey.brandData.rawValue)
+                
+                
                 
                 Utilities.displayAlert("Report Saved! You can synchronize your report later")
                 

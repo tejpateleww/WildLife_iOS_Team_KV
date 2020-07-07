@@ -8,12 +8,13 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    let list_Group = DispatchGroup()
     
     let network = NetworkManager.sharedInstance
     static var shared: AppDelegate {
@@ -22,32 +23,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+//        let container = NSPersistentContainer(name: "WildlifeResearchCenter")
+//        print(container.persistentStoreDescriptions.first?.url)
+        
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
             print("Not first launch.")
-        } else {
             
             if WebService.shared.isConnected {
-                DispatchQueue.global(qos: .background).async {
-                    self.webServiceforLists()
-                    self.webserviceCallForMapDealer()
-                    
-                    UserDefaults.standard.set(true, forKey: "launchedBefore")
-                }
-            }
-        }
-        
-        // Override point for customization after application launch.
-        
-        if WebService.shared.isConnected {
-            
-            DispatchQueue.main.async {
                 self.webserviceCallForInit()
             }
             
+        } else {
             
-        }
+            if WebService.shared.isConnected {
+                
+                self.webserviceCallForInit()
+                
+                DispatchQueue.global(qos: .background).async {
+                    self.webserviceCallForMapDealer { (boolvalue) in
+                        if boolvalue {
+                            self.webServiceforLists()
+//                            self.webserviceCallForInit()
+                        }
+                    }
 
+                }
+                
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
+            }
+        }
         
         if #available(iOS 13.0, *){
             //do nothing we will have a code in SceneceDelegate for this
@@ -96,41 +101,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // API CALL:
       func webserviceCallForInit()
       {
-          let strUrl = "app_version=\(AppInfo.appVersion)&type=IOS"
-          
-          WebServiceSubClass.initApi(strParams: strUrl, showHud: true) { (json, status, response) in
-              
-              guard json["status"].boolValue == true else { return }
-              
-              // if update is nil, then no update is available, if u get this param in resonse, then check for bool.
-              if ((json["update"].bool) != nil) {
-                  
-                  if ((json["update"].bool) == false) {     // update - false means update is not compulsory hense add later action
-                      
-                      let alert = UIAlertController(title: AppInfo.appName,
-                                                    message: json["message"].string ?? "New version is available on App Store",
-                                                    preferredStyle: UIAlertController.Style.alert)
-                      
-                      let okAction = UIAlertAction(title: "Update", style: .default, handler: { (action) in
-                          if let url = URL(string: AppInfo.appUrl) {
-                              UIApplication.shared.open(url)
-                          }
-                      })
-                      
-                      let LaterAction = UIAlertAction(title: "Later", style: .default, handler: { (action) in
-                          alert.dismiss(animated: true) {
-                          }
-                      })
-                      
-                      alert.addAction(okAction)
-                      alert.addAction(LaterAction)
-                      
-//                      DispatchQueue.main.async {
-                          AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
-//                    }
-                  }
-                  else if((json["update"].boolValue) == true)
-                  {
+        let strUrl = "app_version=\(AppInfo.appVersion)&type=IOS"
+        
+        WebServiceSubClass.initApi(strParams: strUrl, showHud: true) { (json, status, response) in
+            
+            guard json["status"].boolValue == true else { return }
+            
+            // if update is nil, then no update is available, if u get this param in resonse, then check for bool.
+            if ((json["update"].bool) != nil) {
+                
+                if ((json["update"].bool) == false) {     // update - false means update is not compulsory hense add later action
+                    
+                    let alert = UIAlertController(title: AppInfo.appName,
+                                                  message: json["message"].string ?? "New version is available on App Store",
+                                                  preferredStyle: UIAlertController.Style.alert)
+                    
+                    let okAction = UIAlertAction(title: "Update", style: .default, handler: { (action) in
+                        if let url = URL(string: AppInfo.appUrl) {
+                            UIApplication.shared.open(url)
+                        }
+                    })
+                    
+                    let LaterAction = UIAlertAction(title: "Later", style: .default, handler: { (action) in
+                        alert.dismiss(animated: true) {
+                        }
+                    })
+                    
+                    alert.addAction(okAction)
+                    alert.addAction(LaterAction)
+                    
+                    //                      DispatchQueue.main.async {
+                    AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
+                    //                    }
+                }
+                else if((json["update"].boolValue) == true)
+                {
                     let alert = UIAlertController(title: AppInfo.appName,
                                                   message: json["message"].string ?? "Update is required to proceed",
                                                   preferredStyle: UIAlertController.Style.alert)
@@ -138,59 +143,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let okAction = UIAlertAction(title: "Update", style: .default, handler: { (action) in
                         if let url = URL(string: AppInfo.appUrl) {
                             UIApplication.shared.open(url)
-        
+                            
                         }
                     })
                     
                     alert.addAction(okAction)
                     AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
                 }
-              }
-              
-              
-              let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-              if launchedBefore  {
-                  print("Not first launch.")
-                  
-                  if json["option"].stringValue == "1" {
-                      // Call the Lists and Map Dealer api async
-                      DispatchQueue.global(qos: .background).async {
-                          self.webserviceCallForMapDealer()
-                          self.webServiceforLists()
-                      }
-                  }
-              }
-              
-          }
-      }
+            }
+            
+            
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            if launchedBefore  {
+                print("Not First Time")
+                
+                // This only occurs if
+                if json["option"].stringValue == "1" {
+                    self.webserviceCallForMapDealer { (boolv) in
+                        if boolv {
+                            self.webServiceforLists()
+                        }
+                    }
+                }
+            }
+        }
+    }
       
       
       
-      func webserviceCallForMapDealer() {
-          
-          DataBaseHandler.sharedManager.deleteMapDealerData()
+    func webserviceCallForMapDealer( completion : @escaping (Bool) -> ()) {
         
-          WebServiceSubClass.mapDealers { (json, success, resp) in
-              
+        DataBaseHandler.sharedManager.deleteMapDealerData()
+        
+        WebServiceSubClass.mapDealers(showhud: false) { (json, success, resp) in
+            
             if success {
                 
                 let jsonArr = json["result"].arrayValue
                 var arr_MapDealers : [MapDealerData] = []
                 
-                DispatchQueue.global(qos: .background).async {
-                    for eachJsonDict in jsonArr {
-                        let newMapDealer = MapDealerData(json: eachJsonDict)
-                        arr_MapDealers.append(newMapDealer)
-                        DataBaseHandler.sharedManager.saveMapDealerData(modal: newMapDealer)
-                    }
+                //                DispatchQueue.global(qos: .background).async {
+                for eachJsonDict in jsonArr {
+                    let newMapDealer = MapDealerData(json: eachJsonDict)
+                    arr_MapDealers.append(newMapDealer)
+                    DataBaseHandler.sharedManager.saveMapDealerData(modal: newMapDealer)
                 }
+                //                }
                 
+                DataBaseHandler.sharedManager.saveContext()
                 
+                completion(true)
                 
             }
-          }
-      }
-    
+        }
+    }
     
     func webServiceforLists() {
         
@@ -204,13 +210,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 let stateJson = json["state_list"].arrayValue
-                var stateList : [String] = ["Select"]
+                var stateList : [String] = []
                 stateJson.forEach { (eachState) in
                     stateList.append(eachState.stringValue)
                 }
                 
                 let cityJson = json["city_list"].arrayValue
-                var cityList : [String] = ["Select"]
+                var cityList : [String] = []
                 cityJson.forEach { (eachCity) in
                     cityList.append(eachCity.stringValue)
                 }
@@ -228,6 +234,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 cityList.forEach { (eachCityName) in
                     DataBaseHandler.sharedManager.saveCityNames(str: eachCityName)
                 }
+                
+                DataBaseHandler.sharedManager.saveContext()
                 
             } else {
                 // unsuccessfull

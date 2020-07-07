@@ -26,7 +26,6 @@ class RetailReportMainViewController: UIViewController {
     var retailStoreQuestions_Array = [RetailsStoreQuestion]()
     var comesAfterSubmission : Bool = false
     
-    
     var currentUserDetails : NSManagedObject!
 
     //MARK:- Life Cycle
@@ -50,9 +49,7 @@ class RetailReportMainViewController: UIViewController {
                   ]
         
         
-        // get details from user defaults. Match the user in local DB , Make him current user and Fetch all his current REport Details
         getUserDetails()
-        
         
        // Stuff if the store is selected.
         
@@ -76,8 +73,6 @@ class RetailReportMainViewController: UIViewController {
                 ]
             }
         }
-        
-        
         
         tableView.tableFooterView = UIView()
         tableView.sizeToFit()
@@ -107,8 +102,6 @@ class RetailReportMainViewController: UIViewController {
             
             self.retailStoreQuestions_Array = storeinfo.retailStoreQuestions_Arr
             
-            
-            
             btnNext.isGrayButton = false
             btnNext.awakeFromNib()
         } else {
@@ -136,7 +129,6 @@ class RetailReportMainViewController: UIViewController {
         
         
 //        check if store is selected. if selected then display the switch data as it was.
-        
     }
     
     
@@ -244,10 +236,12 @@ extension RetailReportMainViewController {
     func getUserDetails() {
         
         
-        //Fetch User Profile and fill textfields
+        //Fetch User details from user details and store it in shared instance and fill textfields
         let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
         let userDetails = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data!) as? UserInfo
         
+        SingletonClass.sharedInstance.LoginRegisterUpdateData? = userDetails!
+//        print(userDetails?.data.username)
         //Set the textfields
         txtName.text = userDetails?.data.full_name ?? ""
         txtEmail.text = userDetails?.data.email_address ?? ""
@@ -257,7 +251,6 @@ extension RetailReportMainViewController {
         let allUserData = DataBaseHandler.sharedManager.fetchAllUserData(entityName: "User")
     
         //match and make the current user which is in the user defaults.
-        
         for user in allUserData! {
             
             if user.value(forKeyPath: "username") as? String == userDetails?.data.username {
@@ -272,11 +265,6 @@ extension RetailReportMainViewController {
         
         // Save the context/ Changes
         DataBaseHandler.sharedManager.saveContext()
-        
-//        self.currentUserDetails = DataBaseHandler.sharedManager.fetchCurrentUserData()
-        
-//        currentUserDetails.value(forKeyPath: "")
-        
         
         retailStoreQuestions_Array = [RetailsStoreQuestion(title: "Were wildlife products set-Up in store?", isOn: false),
          RetailsStoreQuestion(title: "Were our products priced?", isOn: false),

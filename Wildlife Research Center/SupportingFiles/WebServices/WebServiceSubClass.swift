@@ -11,7 +11,7 @@ import UIKit
 
 class WebServiceSubClass{
     
-    class func initApi( strParams : String ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+    class func initApi( strParams : String ,showHud : Bool = true ,completion: @escaping CompletionResponse ) {
         WebService.shared.getMethod(api: .Init, parameterString: strParams, httpMethod: .get,showHud: showHud, completion: completion)
     }
     
@@ -19,7 +19,7 @@ class WebServiceSubClass{
         WebService.shared.getMethod(api: .login, parameterString: "juser=\(userName)&jpass=\(passWord)" , httpMethod: .get, showHud: showHud, completion: completion)
     }
     
-    class func storeStateCityListsApi( showhud: Bool = true, completion : @escaping CompletionResponse) {
+    class func storeStateCityListsApi( showhud: Bool, completion : @escaping CompletionResponse) {
         WebService.shared.getMethod(api: .StoreStateAndCityList, parameterString: "", httpMethod: .get, showHud: showhud, completion: completion)
     }
     
@@ -35,7 +35,7 @@ class WebServiceSubClass{
         WebService.shared.getMethod(api: .StoreListForStates, parameterString: str , httpMethod: .get, showHud: showhud, completion: completion)
     }
     
-    class func imageUploadAPI( image: UIImage, showhud: Bool = true, completion: @escaping CompletionResponse) {
+    class func imageUploadAPI( image: UIImage, showhud: Bool = false, completion: @escaping CompletionResponse) {
         
         let param = ["fileToUpload" : ""]
         
@@ -48,7 +48,7 @@ class WebServiceSubClass{
         WebService.shared.requestMethod(api: .SubmitReports, httpMethod: .post, showHud: showhud, parameters: params, completion: completion)
     }
     
-    class func mapDealers( showhud: Bool = false, completion : @escaping CompletionResponse ) {
+    class func mapDealers( showhud: Bool = true, completion : @escaping CompletionResponse ) {
         WebService.shared.getMethod(api: .mapDealers, parameterString: "", httpMethod: .get, showHud: showhud, completion: completion)
     }
     

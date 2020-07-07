@@ -50,8 +50,6 @@ class RetailReportViewController: UIViewController {
     var fillData_3 = 0
     var fillData_4 = 0
     var fillData_5 = 0
-    
-    var brandArr : [BrandData] = []
 
     
     override func viewDidLoad() {
@@ -62,13 +60,6 @@ class RetailReportViewController: UIViewController {
         pickerView?.delegate = self
         pickerView?.dataSource = self
         
-        
-        let brandarr = userDefault.object(forKey: UserDefaultsKey.brandArr.rawValue) as? Data
-        if brandarr != nil {
-            let arr = try? PropertyListDecoder().decode(Array<BrandData>.self, from: brandarr!)
-            self.brandArr = arr!
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +69,15 @@ class RetailReportViewController: UIViewController {
         setBtnTitles()
     }
     
+    
+    @IBAction func btnTapAction_HowToCountFacingsLink(_ sender: UIButton) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "HelpVC") as! HelpVC
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+
     
     func setBtnTitles() {
         
@@ -221,7 +221,7 @@ class RetailReportViewController: UIViewController {
     
     @IBAction func btnSubmitPressed(_ sender: ThemeButton) {
         
-
+        
         // Store all the values - button titles to a modal.
         let a = Int(btnScentEliminationFacings.title(for: .normal)!) ?? 0
         let b = Int(btnScentElimination_PalletDisplays.title(for: .normal)!) ?? 0
@@ -270,10 +270,28 @@ class RetailReportViewController: UIViewController {
                                   does_this_Brand_have_An_Exclusive_EndCap: e)
         
         let brandData = BrandData(id: brandID, brandName: self.brandName, scentData: scentData, allSubmitted: true)
-    
+        
         
         let data = try? PropertyListEncoder().encode(brandData)
         userDefault.set(data, forKey: UserDefaultsKey.brandData.rawValue)
+        
+        
+        
+        var br : [BrandData] = []
+        let brandarr = userDefault.object(forKey: UserDefaultsKey.brandArr.rawValue) as? Data
+        if brandarr != nil {
+            let brandar = try? PropertyListDecoder().decode(Array<BrandData>.self, from: brandarr!)
+            br = brandar!
+        }
+        
+        for i in 0..<br.count {
+            if br[i].brandName == brandData.brandName {
+                br[i] = brandData
+            }
+        }
+        
+        let arrdata = try? PropertyListEncoder().encode(br)
+        userDefault.set(arrdata, forKey: UserDefaultsKey.brandArr.rawValue)
         
         self.navigationController?.popViewController(animated: true)
     }

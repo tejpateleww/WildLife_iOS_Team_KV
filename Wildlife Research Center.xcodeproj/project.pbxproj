@@ -34,6 +34,8 @@
 		6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B224A724F40065C18E /* PhotoModal.swift */; };
 		6E2FD42524AC9E0300EA16F3 /* DatabaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FD42424AC9E0300EA16F3 /* DatabaseHandler.swift */; };
 		6E2FD42824AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FD42624AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld */; };
+		6E435FB424B494B900A2181E /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E435FB324B494B900A2181E /* SplashVC.swift */; };
+		6E45B17024B452770017638C /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45B16F24B452770017638C /* HelpVC.swift */; };
 		6E63BD4E24ADDD2D00A05CFC /* MapDealerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */; };
 		6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40D24507956002AEF26 /* AppDelegate.swift */; };
 		6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40F24507956002AEF26 /* SceneDelegate.swift */; };
@@ -107,6 +109,8 @@
 		6E20F4B224A724F40065C18E /* PhotoModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModal.swift; sourceTree = "<group>"; };
 		6E2FD42424AC9E0300EA16F3 /* DatabaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHandler.swift; sourceTree = "<group>"; };
 		6E2FD42724AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WildlifeResearchCenter.xcdatamodel; sourceTree = "<group>"; };
+		6E435FB324B494B900A2181E /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		6E45B16F24B452770017638C /* HelpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpVC.swift; sourceTree = "<group>"; };
 		6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDealerData.swift; sourceTree = "<group>"; };
 		6E6EC40A24507956002AEF26 /* Wildlife Research Center.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildlife Research Center.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6EC40D24507956002AEF26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				6E8200292452B95F0071EB6D /* Store */,
 				6E77B3052451AFEF00C3A110 /* RetailsReport */,
 				6E77B3002451791700C3A110 /* Login */,
+				6E435FB324B494B900A2181E /* SplashVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				6E77B30A2451CB9A00C3A110 /* RetailReportViewController.swift */,
 				6E820035245311490071EB6D /* RetailReportThirdViewController.swift */,
 				6ED44641245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift */,
+				6E45B16F24B452770017638C /* HelpVC.swift */,
 			);
 			path = RetailsReport;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 				6E6EC42B245080D6002AEF26 /* Color.swift in Sources */,
 				6E6EC42724507E6B002AEF26 /* UIView+Extention.swift in Sources */,
 				6E820034245303160071EB6D /* RetaildReportMainTableViewCell.swift in Sources */,
+				6E45B17024B452770017638C /* HelpVC.swift in Sources */,
 				4D90BA08246E85E100E37C80 /* AppInfo.swift in Sources */,
 				6E63BD4E24ADDD2D00A05CFC /* MapDealerData.swift in Sources */,
 				4D48E7D9247D265B006040E4 /* NetworkManager.swift in Sources */,
@@ -599,6 +606,7 @@
 				4D90BA12246E8A0800E37C80 /* ResProfileDatum.swift in Sources */,
 				4D5BE9C3246ED0E1005FFD0C /* Validator.swift in Sources */,
 				6E952C2524A9B2F0004BE31E /* OfflineReportModal.swift in Sources */,
+				6E435FB424B494B900A2181E /* SplashVC.swift in Sources */,
 				6E77B3022451792D00C3A110 /* LoginViewController.swift in Sources */,
 				6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */,
 				6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */,
