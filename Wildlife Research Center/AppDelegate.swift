@@ -23,8 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        let container = NSPersistentContainer(name: "WildlifeResearchCenter")
-//        print(container.persistentStoreDescriptions.first?.url)
+        //        let container = NSPersistentContainer(name: "WildlifeResearchCenter")
+        //        print(container.persistentStoreDescriptions.first?.url)
+        
+        if #available(iOS 13.0, *) {
+            // prefer a light interface style with this:
+            window?.overrideUserInterfaceStyle = .light
+            
+            //window.overrideUserInterfaceStyle = .light
+        }
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
@@ -44,58 +51,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.webserviceCallForMapDealer { (boolvalue) in
                         if boolvalue {
                             self.webServiceforLists()
-//                            self.webserviceCallForInit()
+                            //                            self.webserviceCallForInit()
                         }
                     }
-
                 }
-                
                 UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
         }
         
-        if #available(iOS 13.0, *){
-            //do nothing we will have a code in SceneceDelegate for this
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "RetailReportMainViewController") as! RetailReportMainViewController
+        
+        let isUserLoggedin = userDefault.value(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool
+        if isUserLoggedin != nil && isUserLoggedin == true {
+            
+            let navigationController = UINavigationController(rootViewController: mainVC)
+            navigationController.isNavigationBarHidden = true // or not, your choice.
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window!.rootViewController = navigationController
+            
         } else {
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "RetailReportMainViewController") as! RetailReportMainViewController
-            
-            let isUserLoggedin = userDefault.value(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool
-            if isUserLoggedin != nil && isUserLoggedin == true {
-                
-                let navigationController = UINavigationController(rootViewController: mainVC)
-                navigationController.isNavigationBarHidden = true // or not, your choice.
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window!.rootViewController = navigationController
-                
-            } else {
-                let navigationController = UINavigationController(rootViewController: loginVC)
-                navigationController.isNavigationBarHidden = true // or not, your choice.
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window!.rootViewController = navigationController
-            }
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            navigationController.isNavigationBarHidden = true // or not, your choice.
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window!.rootViewController = navigationController
         }
         
         IQKeyboardManager.shared.enable = true
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-     @available(iOS 13.0, *)
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
+    
     
     
     // API CALL:
@@ -106,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WebServiceSubClass.initApi(strParams: strUrl, showHud: true) { (json, status, response) in
             
             guard json["status"].boolValue == true else { return }
+            print(json)
             
             // if update is nil, then no update is available, if u get this param in resonse, then check for bool.
             if ((json["update"].bool) != nil) {
@@ -190,7 +180,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 //                }
                 
+                
                 DataBaseHandler.sharedManager.saveContext()
+                print("Map Dealers Saved")
                 
                 completion(true)
                 
@@ -199,6 +191,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func webServiceforLists() {
+        
+        
+        // Delete the existing Lists from Core data stack/context.
+        
+        DataBaseHandler.sharedManager.deleteStateListData()
+        DataBaseHandler.sharedManager.deleteStoreListData()
+        DataBaseHandler.sharedManager.deleteCityListData()
+        
         
         WebServiceSubClass.storeStateCityListsApi(showhud: false) { (json, success, resp) in
             

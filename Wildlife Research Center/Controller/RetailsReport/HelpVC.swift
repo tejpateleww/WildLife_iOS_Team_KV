@@ -23,7 +23,7 @@ class HelpVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         
         if WebService.shared.isConnected {
             Utilities.showHud()
-            let url = URL(string: "http://wildlife.excellentwebworld.in/lorem.pdf")!
+            let url = URL(string: "https://www.wildlife.com/app-display-instructions.php")!
             webView.load(URLRequest(url: url))
             webView.allowsBackForwardNavigationGestures = true
         } else {

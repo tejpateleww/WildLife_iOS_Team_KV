@@ -184,6 +184,57 @@ class DataBaseHandler {
         }
     }
     
+    func deleteStateListData() {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Statenames")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do
+        {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            try persistentContainer.viewContext.save()
+        }
+        catch
+        {
+            print ("There was an error")
+        }
+    }
+    
+    func deleteStoreListData() {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Storenames")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do
+        {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            try persistentContainer.viewContext.save()
+        }
+        catch
+        {
+            print ("There was an error")
+        }
+    }
+    
+    func deleteCityListData() {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Citynames")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do
+        {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            try persistentContainer.viewContext.save()
+        }
+        catch
+        {
+            print ("There was an error")
+        }
+    }
+    
+    
+    
+    
     
     // Store - State - City Names Functions ( for Select Store screen)
     

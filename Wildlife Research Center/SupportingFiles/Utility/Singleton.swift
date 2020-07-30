@@ -16,6 +16,7 @@ class SingletonClass: NSObject {
         var LoginRegisterUpdateData : UserInfo?
         var Api_Key = String()
         var DeviceToken : String = ""
+    
     //    var currentLat = Double()
     //    var currentLong = Double()
         

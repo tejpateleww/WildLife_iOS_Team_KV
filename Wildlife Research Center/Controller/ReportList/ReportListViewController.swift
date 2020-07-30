@@ -25,6 +25,8 @@ class ReportListViewController: UIViewController {
     var submitsToSync_Arr : [SubmitMaster]?
     var apiCallCount = 0
     
+    let addStoreManually_DispatchGroup = DispatchGroup()
+    
     let imgWaitingTime_DispatchGroup = DispatchGroup()
     let imgUploads_DispatchGroup = DispatchGroup()
     let submit_DispatchGroup = DispatchGroup()
@@ -83,6 +85,7 @@ class ReportListViewController: UIViewController {
         }
     }
     
+    
     //MARK:- Events:
     
     @IBAction func syncBtnPressed(_ sender: Any) {
@@ -92,7 +95,9 @@ class ReportListViewController: UIViewController {
             let alert = UIAlertController(title: "Synchronize all reports?", message: "You cannot undo this operation once it starts synchronizing", preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-                self.uploadImages()
+//                self.uploadImages()
+                
+                self.uploadAllStore()
             }
             
             let cancleAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
@@ -189,10 +194,41 @@ extension ReportListViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: API CALLs:
 extension ReportListViewController {
     
-    func uploadImages() {
+    func uploadAllStore() {
         
         Utilities.showHud()
         
+        for i in 0..<arr_CurrentUser_OfflineReports.count {
+            
+            self.addStoreManually_DispatchGroup.enter()
+            
+            let paramData = arr_CurrentUser_OfflineReports[i].paramsDict
+            let paramDict = try? JSONSerialization.jsonObject(with: paramData!, options: []) as? [String : Any]
+            let isNewStore = paramDict!["new_store"] as! Int   // added manually.
+            
+            if isNewStore == 1 {
+                // we need to call the api ..
+                let store = paramDict!["store_name"] as! String
+                let state = paramDict!["store_state"] as! String
+                let city = paramDict!["store_city"] as! String
+                
+                webService_AddStoreManually(store: store, state: state, city: city)
+            } else {
+                self.addStoreManually_DispatchGroup.leave()
+            }
+            
+        }
+        
+        addStoreManually_DispatchGroup.notify(queue: DispatchQueue.main, execute: {
+            print("All Manual Stores added")
+            
+            self.uploadImages()
+        })
+        
+    }
+    
+    
+    func uploadImages() {
         
         for i in 0..<arr_CurrentUser_OfflineReports.count {
             
@@ -203,6 +239,8 @@ extension ReportListViewController {
                 let paramData = arr_CurrentUser_OfflineReports[i].paramsDict
                 var paramDict = try? JSONSerialization.jsonObject(with: paramData!, options: []) as? [String : Any]
                 
+                var imgStrArray : [String] = []
+                
                 for j in 0..<arr_CurrentUser_OfflineReports[i].imgArr.count {
                     imgUploads_DispatchGroup.enter()
                     // WebService Call
@@ -210,18 +248,18 @@ extension ReportListViewController {
                         if success {
                             //json["result"].stringValue
                             
-                            let id = self.arr_CurrentUser_OfflineReports[i].imgArr[j].id
-                            let key = "photos_\(id)"
-                            
-                            paramDict![key] = json["result"].stringValue
-                            
-                            let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
-                            self.arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
-                            
+                            imgStrArray.append(json["result"].stringValue)
                             self.imgUploads_DispatchGroup.leave()
                         }
                     }
                 }
+                
+                let finalString = imgStrArray.joined(separator: ",")
+                paramDict!["photos"] = finalString
+                
+                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
+                self.arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
+                
                 
                 //                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
                 //                arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
@@ -327,5 +365,22 @@ extension ReportListViewController {
         }
         
     }
+    
+    
+    
+    
+    func webService_AddStoreManually(store: String, state: String, city: String) {
+           
+           WebServiceSubClass.addStoreManually(store: store, state: state, city: city, showhud: true) { (json, success, resp) in
+               if success {
+                
+                self.addStoreManually_DispatchGroup.leave()
+                
+               } else {
+//                   self.showAlert(msg: json["message"].stringValue)
+               }
+           }
+           
+       }
 }
 

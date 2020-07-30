@@ -39,7 +39,7 @@ class RetailReportSecondViewController: UIViewController {
         
         if brandArr.count == 0 {
             for i in 0..<7 {
-                let data = BrandData(id: i+1, brandName: aryData[i], scentData: ScentData(scent_Elimination_Facings: 0, scent_Elimination_Pallet_Displays: 0, scent_And_Dispenser_Facings: 0, scent_And_Dispenser_Pallet_Displays: 0, does_this_Brand_have_An_Exclusive_EndCap: 0), allSubmitted: false)
+                let data = BrandData(id: i+1, brandName: aryData[i], scentData: ScentData(scent_Elimination_Facings: 0, scent_Elimination_Pallet_Displays: 0, scent_And_Dispenser_Facings: 0, scent_And_Dispenser_Pallet_Displays: 0, does_this_Brand_have_An_Exclusive_EndCap: 0, scent_elimination_end_cap: 0 ), allSubmitted: false)
                 
                 self.brandArr.append(data)
             }
@@ -148,17 +148,23 @@ extension RetailReportSecondViewController: UITableViewDataSource, UITableViewDe
         if brandArr.count >= indexPath.row + 1 {
             let data = brandArr[indexPath.row].scentData!
             
+            vc.submitted = brandArr[indexPath.row].allSubmitted
+            
             vc.fillData_1 = data.scent_Elimination_Facings ?? 00
             vc.fillData_2 = data.scent_Elimination_Pallet_Displays ?? 00
             vc.fillData_3 = data.scent_And_Dispenser_Facings ?? 00
             vc.fillData_4 = data.scent_And_Dispenser_Pallet_Displays ?? 00
             vc.fillData_5 = data.does_this_Brand_have_An_Exclusive_EndCap ?? 00
             
+            vc.fillData_6 = data.scent_elimination_end_cap ?? 00
+            
             vc.selectedValue_1 = "\(data.scent_Elimination_Facings ?? 00)"
             vc.selectedValue_2 = "\(data.scent_Elimination_Pallet_Displays ?? 00)"
             vc.selectedValue_3 = "\(data.scent_And_Dispenser_Facings ?? 00)"
             vc.selectedValue_4 = "\(data.scent_And_Dispenser_Pallet_Displays ?? 00)"
             vc.selectedValue_5 = "\(data.does_this_Brand_have_An_Exclusive_EndCap ?? 00)"
+            
+            vc.selectedValue_6 = "\(data.scent_elimination_end_cap ?? 00)"
             
         }
         

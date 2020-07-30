@@ -29,6 +29,8 @@
 		4D90BA12246E8A0800E37C80 /* ResProfileDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D90BA11246E8A0800E37C80 /* ResProfileDatum.swift */; };
 		4DA3654C247398BC007CB068 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3654B247398BC007CB068 /* SelectLocationViewController.swift */; };
 		4DA3654E24739C1F007CB068 /* SelectStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3654D24739C1F007CB068 /* SelectStoreTableViewCell.swift */; };
+		6E09015F24C7F76500808CF0 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E09015E24C7F76500808CF0 /* SearchVC.swift */; };
+		6E09016124C8004C00808CF0 /* searchTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E09016024C8004C00808CF0 /* searchTblViewCell.swift */; };
 		6E20F4AF24A70A930065C18E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4AE24A70A930065C18E /* AppUser.swift */; };
 		6E20F4B124A70C6B0065C18E /* ReportModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B024A70C6B0065C18E /* ReportModal.swift */; };
 		6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20F4B224A724F40065C18E /* PhotoModal.swift */; };
@@ -38,7 +40,6 @@
 		6E45B17024B452770017638C /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45B16F24B452770017638C /* HelpVC.swift */; };
 		6E63BD4E24ADDD2D00A05CFC /* MapDealerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */; };
 		6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40D24507956002AEF26 /* AppDelegate.swift */; };
-		6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC40F24507956002AEF26 /* SceneDelegate.swift */; };
 		6E6EC41224507956002AEF26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EC41124507956002AEF26 /* ViewController.swift */; };
 		6E6EC41524507956002AEF26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6EC41324507956002AEF26 /* Main.storyboard */; };
 		6E6EC41724507957002AEF26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E6EC41624507957002AEF26 /* Assets.xcassets */; };
@@ -104,6 +105,8 @@
 		4DA3654B247398BC007CB068 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		4DA3654D24739C1F007CB068 /* SelectStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStoreTableViewCell.swift; sourceTree = "<group>"; };
 		571D36F21F434528C9818E01 /* Pods_Wildlife_Research_Center.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wildlife_Research_Center.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E09015E24C7F76500808CF0 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		6E09016024C8004C00808CF0 /* searchTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTblViewCell.swift; sourceTree = "<group>"; };
 		6E20F4AE24A70A930065C18E /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		6E20F4B024A70C6B0065C18E /* ReportModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModal.swift; sourceTree = "<group>"; };
 		6E20F4B224A724F40065C18E /* PhotoModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModal.swift; sourceTree = "<group>"; };
@@ -114,7 +117,6 @@
 		6E63BD4D24ADDD2D00A05CFC /* MapDealerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDealerData.swift; sourceTree = "<group>"; };
 		6E6EC40A24507956002AEF26 /* Wildlife Research Center.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildlife Research Center.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6EC40D24507956002AEF26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6E6EC40F24507956002AEF26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6E6EC41124507956002AEF26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6E6EC41424507956002AEF26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E6EC41624507957002AEF26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -326,7 +328,6 @@
 				6E6EC42224507A1E002AEF26 /* Model */,
 				6E6EC42324507A4B002AEF26 /* Controller */,
 				6E6EC40D24507956002AEF26 /* AppDelegate.swift */,
-				6E6EC40F24507956002AEF26 /* SceneDelegate.swift */,
 				6E6EC41124507956002AEF26 /* ViewController.swift */,
 				6E6EC41324507956002AEF26 /* Main.storyboard */,
 				6E6EC41624507957002AEF26 /* Assets.xcassets */,
@@ -372,10 +373,10 @@
 		6E6EC42324507A4B002AEF26 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6E82002C2452C1440071EB6D /* ReportList */,
-				6E8200292452B95F0071EB6D /* Store */,
-				6E77B3052451AFEF00C3A110 /* RetailsReport */,
 				6E77B3002451791700C3A110 /* Login */,
+				6E77B3052451AFEF00C3A110 /* RetailsReport */,
+				6E8200292452B95F0071EB6D /* Store */,
+				6E82002C2452C1440071EB6D /* ReportList */,
 				6E435FB324B494B900A2181E /* SplashVC.swift */,
 			);
 			path = Controller;
@@ -423,6 +424,8 @@
 				6E820035245311490071EB6D /* RetailReportThirdViewController.swift */,
 				6ED44641245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift */,
 				6E45B16F24B452770017638C /* HelpVC.swift */,
+				6E09015E24C7F76500808CF0 /* SearchVC.swift */,
+				6E09016024C8004C00808CF0 /* searchTblViewCell.swift */,
 			);
 			path = RetailsReport;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				6ED44642245425A200B6D4B1 /* RetailReportThirdCollectionViewCell.swift in Sources */,
 				4DA3654C247398BC007CB068 /* SelectLocationViewController.swift in Sources */,
 				6E8200302452CB2B0071EB6D /* ReportListTableViewCell.swift in Sources */,
+				6E09016124C8004C00808CF0 /* searchTblViewCell.swift in Sources */,
 				6E6EC42B245080D6002AEF26 /* Color.swift in Sources */,
 				6E6EC42724507E6B002AEF26 /* UIView+Extention.swift in Sources */,
 				6E820034245303160071EB6D /* RetaildReportMainTableViewCell.swift in Sources */,
@@ -609,7 +613,6 @@
 				6E435FB424B494B900A2181E /* SplashVC.swift in Sources */,
 				6E77B3022451792D00C3A110 /* LoginViewController.swift in Sources */,
 				6E6EC40E24507956002AEF26 /* AppDelegate.swift in Sources */,
-				6E6EC41024507956002AEF26 /* SceneDelegate.swift in Sources */,
 				6E2FD42824AC9EF700EA16F3 /* WildlifeResearchCenter.xcdatamodeld in Sources */,
 				6E20F4B324A724F40065C18E /* PhotoModal.swift in Sources */,
 				6E82002E2452C2390071EB6D /* ReportListViewController.swift in Sources */,
@@ -622,6 +625,7 @@
 				6E77B304245188B400C3A110 /* UITextField+Extention.swift in Sources */,
 				4D90BA0D246E881500E37C80 /* UIColor+Extension.swift in Sources */,
 				6E820036245311490071EB6D /* RetailReportThirdViewController.swift in Sources */,
+				6E09015F24C7F76500808CF0 /* SearchVC.swift in Sources */,
 				4D541B1F247F91440055ADBB /* SubmitReport.swift in Sources */,
 				4D644AC92472AB3300DADDCF /* StoreInfo.swift in Sources */,
 				6E820032245302E00071EB6D /* RetailReportMainViewController.swift in Sources */,
@@ -782,14 +786,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LNR2265795;
+				CURRENT_PROJECT_VERSION = 1.0.9;
+				DEVELOPMENT_TEAM = 6JT43DJLTM;
 				INFOPLIST_FILE = "Wildlife Research Center/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eww.Wildlife-Research-Center";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wildlifesales.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -802,14 +808,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LNR2265795;
+				CURRENT_PROJECT_VERSION = 1.0.9;
+				DEVELOPMENT_TEAM = 6JT43DJLTM;
 				INFOPLIST_FILE = "Wildlife Research Center/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eww.Wildlife-Research-Center";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wildlifesales.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

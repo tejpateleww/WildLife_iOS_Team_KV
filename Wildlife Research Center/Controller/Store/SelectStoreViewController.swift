@@ -14,9 +14,15 @@ class SelectStoreViewController: UIViewController {
     
     @IBOutlet weak var btnStoreName: UIButton!
     @IBOutlet weak var btnStateName: UIButton!
-    @IBOutlet weak var btnStoreName_Manually: UIButton!
     @IBOutlet weak var btnStateName_Manually: UIButton!
+    
     @IBOutlet weak var btnCityName_Manually: UIButton!
+    @IBOutlet weak var downArrow_CitynameManually: UIImageView!
+    
+    @IBOutlet weak var txtfieldStoreNameManually: UITextField!
+    
+    @IBOutlet weak var txtfield_CityNameManually: UITextField!
+    
     
     @IBOutlet weak var btnGetListOfStores: ThemeButton!
     @IBOutlet weak var btnUseThisStore: ThemeButton!
@@ -56,6 +62,14 @@ class SelectStoreViewController: UIViewController {
         pickerView = UIPickerView()
         pickerView?.delegate = self
         pickerView?.dataSource = self
+        
+        if WebService.shared.isConnected {
+            btnCityName_Manually.isHidden = false
+            downArrow_CitynameManually.isHidden = false
+        } else {
+            btnCityName_Manually.isHidden = true
+            downArrow_CitynameManually.isHidden = true
+        }
         
         print("City List Count: \(cityList.count)")
         print("Store List Count: \(storeList.count)")
@@ -107,19 +121,17 @@ class SelectStoreViewController: UIViewController {
             guard let storeinfo = try? PropertyListDecoder().decode(StoreInfo.self, from: storeData) else { return }
             
             if storeinfo.isStoreAddedManually! {
-                self.btnStoreName_Manually.setTitle(storeinfo.storeName, for: .normal)
+                
+
+                self.txtfieldStoreNameManually.text = storeinfo.storeName
+                
                 self.btnStateName_Manually.setTitle(storeinfo.stateName, for: .normal)
-                self.btnCityName_Manually.setTitle(storeinfo.cityName, for: .normal)
+                
+                self.txtfield_CityNameManually.text = storeinfo.cityName
                 
                 selectedValue_3 = storeinfo.storeName
                 selectedValue_4 = storeinfo.stateName
                 selectedValue_5 = storeinfo.cityName
-                
-                if self.btnStoreName_Manually.currentTitle! != "Select" && self.btnStateName_Manually.currentTitle! != "Select" && self.btnCityName_Manually.currentTitle != "Select"  {
-                    self.ChangeThemeFor_btn_UseThisStore()
-                } else {
-                    self.reset_btnUseThisStore()
-                }
                 
             } else {
                 self.btnStateName.setTitle(storeinfo.stateName, for: .normal)
@@ -141,6 +153,8 @@ class SelectStoreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBarWithMenuORBack(Title: "Select Store", leftButton: "back", IsNeedRightButton: false, isTranslucent: false, isRounded: false)
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,6 +164,13 @@ class SelectStoreViewController: UIViewController {
         vwbottomSection.clipsToBounds = true
         vwbottomSection.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
+    }
+    
+    func refreshValues() {
+        self.btnStoreName.setTitle(selectedValue_1, for: .normal)
+        self.btnStateName.setTitle(selectedValue_2, for: .normal)
+        self.btnStateName_Manually.setTitle(selectedValue_4, for: .normal)
+        self.btnCityName_Manually.setTitle(selectedValue_5, for: .normal)
     }
     
     
@@ -167,13 +188,14 @@ class SelectStoreViewController: UIViewController {
             btnStateName.layer.borderWidth = 0.5
             btnStateName.layer.borderColor = UIColor.red.cgColor
         }
-    
+        
+        
         
         guard btnStateName.title(for: .normal) != "Select" && btnStoreName.title(for: .normal) != "Select" else {
             showAlert(msg: "Please Select a value")
             return
         }
-
+ 
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SelectLocationViewController") as! SelectLocationViewController
         vc.state = btnStateName.title(for: .normal)!
         vc.store = btnStoreName.title(for: .normal)!
@@ -182,41 +204,82 @@ class SelectStoreViewController: UIViewController {
     
     @IBAction func useThisStore_BtnPressed(_ sender: Any) {
         
-        if btnStoreName_Manually.title(for: .normal) == "Select" {
-            btnStoreName_Manually.layer.borderWidth = 0.5
-            btnStoreName_Manually.layer.borderColor = UIColor.red.cgColor
-        }
+        if WebService.shared.isConnected {
+            
+            var city = ""
+            
+            if btnStateName_Manually.title(for: .normal) == "Select" {
+                btnStateName_Manually.layer.borderWidth = 0.5
+                btnStateName_Manually.layer.borderColor = UIColor.red.cgColor
+            }
+            
+            
+            if txtfield_CityNameManually.text == "" && btnCityName_Manually.title(for: .normal) == "Select" {
+                btnCityName_Manually.layer.borderWidth = 0.5
+                btnCityName_Manually.layer.borderColor = UIColor.red.cgColor
+            }
         
-        
-        if btnStateName_Manually.title(for: .normal) == "Select" {
-            btnStateName_Manually.layer.borderWidth = 0.5
-            btnStateName_Manually.layer.borderColor = UIColor.red.cgColor
-        }
-        
-        
-        if btnCityName_Manually.title(for: .normal) == "Select" {
-            btnCityName_Manually.layer.borderWidth = 0.5
-            btnCityName_Manually.layer.borderColor = UIColor.red.cgColor
-        }
-        
-        
-    
-        guard btnStoreName_Manually.title(for: .normal) != "Select" else { showAlert(msg: "Please Select a value")
+            
+            guard txtfieldStoreNameManually.text?.count != 0  else { showAlert(msg: "Please enter a store name")
             return
-        }
-        guard btnStateName_Manually.title(for: .normal) != "Select" else { showAlert(msg: "Please Select a value")
-            return
-        }
-        guard btnCityName_Manually.title(for: .normal) != "Select" else { showAlert(msg: "Please Select a value")
-            return
+            }
+            
+            guard btnStateName_Manually.title(for: .normal) != "Select" else { showAlert(msg: "Please select a value")
+                return
+            }
+            
+            guard btnCityName_Manually.title(for: .normal) != "Select" || txtfield_CityNameManually.text != "" else {
+                showAlert(msg: "Please select a value")
+                return
+            }
+            
+            if txtfield_CityNameManually.text != "" {
+                city = txtfield_CityNameManually.text!
+            } else {
+                city = btnCityName_Manually.title(for: .normal)!
+            }
+            
+            webService_AddStoreManually(citytxt: city)
+            
+        } else {
+            
+            guard let storetxt = txtfieldStoreNameManually.text, storetxt.count != 0 else {
+                showAlert(msg: "Please enter a value")
+                return
+            }
+            
+            guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else {
+                showAlert(msg: "Please select a value")
+                return
+            }
+            
+            guard btnCityName_Manually.title(for: .normal) != "Select" && txtfield_CityNameManually.text != "" else {
+                showAlert(msg: "Please select a value")
+                return
+            }
+            
+            var citytxt = ""
+            
+            if txtfield_CityNameManually.text != "" {
+                citytxt = txtfield_CityNameManually.text!
+            } else {
+                citytxt = btnCityName_Manually.title(for: .normal)!
+            }
+            
+            // Store info Will be thr if first tym then all values will be "Select" and switch data will be used.
+            guard let storeData = userDefault.object(forKey: UserDefaultsKey.storeInfo.rawValue) as? Data else { return }
+            guard let storeinfo = try? PropertyListDecoder().decode(StoreInfo.self, from: storeData) else { return }
+            
+            let nwStore = StoreInfo(store: storetxt, state: statetxt, city: citytxt, retailStoreQuestions_Arr: storeinfo.retailStoreQuestions_Arr, isStoreAddedManually: true)
+            let data = try? PropertyListEncoder().encode(nwStore)
+            userDefault.set(data, forKey: UserDefaultsKey.storeInfo.rawValue)
+            
+            userDefault.set(true, forKey: UserDefaultsKey.isStoreSelected.rawValue)
+            
+            
+            self.navigationController?.popViewController(animated: true)
         }
         
-        guard WebService.shared.isConnected else {
-            Utilities.displayAlert("You must be connected to the internet to add store manually")
-            return
-        }
-        
-        webService_AddStoreManually()
     }
     
     
@@ -224,7 +287,41 @@ class SelectStoreViewController: UIViewController {
     // Whenever user presses a button to open a picker to choose state / store / city
     @IBAction func btnDropDownAction(_ sender: UIButton) {
         
+        btnStoreName.layer.borderWidth = 0
+        btnStateName.layer.borderWidth = 0
+        btnStateName_Manually.layer.borderWidth = 0
+        btnCityName_Manually.layer.borderWidth = 0
+              
         
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+    
+        switch sender.tag {
+        case 1:
+            vc.list = self.storeList
+        
+        case 2:
+            vc.list = self.stateList
+        
+        case 3:
+            vc.list = self.storeList
+        
+        case 4:
+            vc.list = self.stateList
+        
+        case 5:
+            txtfield_CityNameManually.text = ""
+            txtfield_CityNameManually.resignFirstResponder()
+            vc.list = self.cityList
+        
+        default:
+            pickerView!.selectRow(0, inComponent: 0, animated: false)
+        }
+        
+        
+        vc.tag = sender.tag
+        self.present(vc, animated: true, completion: nil)
+
+        /*
         btnStoreName.layer.borderWidth = 0
         btnStateName.layer.borderWidth = 0
         btnStoreName_Manually.layer.borderWidth = 0
@@ -242,7 +339,7 @@ class SelectStoreViewController: UIViewController {
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelDatePicker));
         
-        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
         textField.inputAccessoryView = toolbar
         textField.inputView = pickerView
         self.view.addSubview(textField)
@@ -284,12 +381,12 @@ class SelectStoreViewController: UIViewController {
         default:
             pickerView!.selectRow(0, inComponent: 0, animated: false)
         }
-        
+        */
     }
     
     // Custom ToolBar -> Done btn Tap -> handles the selected value in picker
     @objc func doneButtonTapped() {
-        
+        /*
         switch selectedTag {
         case 1:
             btnStoreName.setTitle(selectedValue_1, for: .normal)
@@ -337,6 +434,7 @@ class SelectStoreViewController: UIViewController {
         
         textField.removeFromSuperview()
         view.endEditing(true)
+        */
     }
        
     @objc func cancelDatePicker() {
@@ -347,7 +445,7 @@ class SelectStoreViewController: UIViewController {
     
     
     //MARK:- API Call
-    
+    /*
     func webServiceforLists() {
         
         if WebService.shared.isConnected {
@@ -437,12 +535,18 @@ class SelectStoreViewController: UIViewController {
             }
         }
     }
+ 
+ */
     
     
-    func webService_AddStoreManually() {
-        guard let storetxt = btnStoreName_Manually.title(for: .normal), storetxt != "", storetxt != "Select" else { return }
+    func webService_AddStoreManually(citytxt: String) {
+        guard let storetxt = txtfieldStoreNameManually.text, storetxt != "", storetxt != "Select" else { return }
         guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else { return }
-        guard let citytxt = btnCityName_Manually.title(for: .normal), citytxt != "", citytxt != "Select" else { return }
+//        guard let citytxt = btnCityName_Manually.title(for: .normal), citytxt != "", citytxt != "Select" else { return }
+        
+        //        guard let citytxt = txtfieldCityNameManually.text, citytxt != "", citytxt != "Select" else { return }
+        
+        print(citytxt)
         
         WebServiceSubClass.addStoreManually(store: storetxt, state: statetxt, city: citytxt, showhud: true) { (json, success, resp) in
             if success {
@@ -462,7 +566,6 @@ class SelectStoreViewController: UIViewController {
                 self.showAlert(msg: json["message"].stringValue)
             }
         }
-        
     }
 
     func showAlert(msg: String) {
@@ -523,8 +626,8 @@ extension SelectStoreViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         guard cityList.count != 0 else {return}
         
         if selectedTag == 1 || selectedTag == 2 {
-            btnStoreName_Manually.setTitle("Select", for: .normal)
-            btnCityName_Manually.setTitle("Select", for: .normal)
+//            btnStoreName_Manually.setTitle("Select", for: .normal)
+//            btnCityName_Manually.setTitle("Select", for: .normal)
             btnStateName_Manually.setTitle("Select", for: .normal)
             
             reset_btnUseThisStore()
@@ -584,4 +687,18 @@ extension SelectStoreViewController: UIPickerViewDelegate, UIPickerViewDataSourc
 //        btnGetListOfStores.awakeFromNib()
     }
     
+}
+
+
+extension SelectStoreViewController : UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if textField == txtfield_CityNameManually {
+            btnCityName_Manually.setTitle("Select", for: .normal)
+            selectedValue_5 = "Select"
+        }
+        
+        return true
+    }
 }

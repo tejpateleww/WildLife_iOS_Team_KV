@@ -8,11 +8,17 @@
 
 import Foundation
 import UIKit
-
+import Darwin
 
 let keywindow = UIApplication.shared.keyWindow
 let appDel = UIApplication.shared.delegate as! AppDelegate
 
+let screenHeightDeveloper : Double = 667 //568
+let screenWidthDeveloper : Double = 375 //320
+let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+let SCREEN_MAX_LENGTH = max(SCREEN_WIDTH, SCREEN_HEIGHT)
+let SCREEN_MIN_LENGTH = min(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 
 enum themeColor: String {
@@ -25,10 +31,6 @@ enum themeColor: String {
     case grayView = "e2e2e2"
     case highlitedGreen = "5C9540"
 }
-
-
-//Aileron
-
 
 enum FontSize : CGFloat {
     
@@ -81,15 +83,6 @@ enum FontBook: String {
     }
 }
 
-
-let screenHeightDeveloper : Double = 667 //568
-let screenWidthDeveloper : Double = 375 //320
-let SCREEN_WIDTH = UIScreen.main.bounds.size.width
-let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
-let SCREEN_MAX_LENGTH = max(SCREEN_WIDTH, SCREEN_HEIGHT)
-let SCREEN_MIN_LENGTH = min(SCREEN_WIDTH, SCREEN_HEIGHT)
-
-
 func gredientColor(myView: UIView, topColor: UIColor, bottomColor: UIColor) {
     
     myView.layoutIfNeeded()
@@ -139,4 +132,11 @@ extension UIColor {
             return UIColor(named: "highlitedGreen") ?? UIColor.black
         }
     }
+}
+
+
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+infix operator ^^ : PowerPrecedence
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
 }

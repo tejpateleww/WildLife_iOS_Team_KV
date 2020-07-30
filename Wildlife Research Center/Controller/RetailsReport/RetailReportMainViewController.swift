@@ -22,6 +22,10 @@ class RetailReportMainViewController: UIViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainScrollView: UIScrollView!
     
+    @IBOutlet weak var vw_SelectedStore: UIView!
+    @IBOutlet weak var lblSelectedStoreName: UILabel!
+    
+    
     //MARK:- Properties
     var retailStoreQuestions_Array = [RetailsStoreQuestion]()
     var comesAfterSubmission : Bool = false
@@ -59,6 +63,9 @@ class RetailReportMainViewController: UIViewController {
             guard let storeData = userDefault.object(forKey: UserDefaultsKey.storeInfo.rawValue) as? Data else { return }
             guard let storeinfo = try? PropertyListDecoder().decode(StoreInfo.self, from: storeData) else { return }
             
+            vw_SelectedStore.isHidden = false
+            lblSelectedStoreName.text = "\(storeinfo.storeName ?? "") , \(storeinfo.cityName ?? "") , \(storeinfo.stateName ?? "") "
+            
             if storeinfo.retailStoreQuestions_Arr.count > 7 {
                 self.retailStoreQuestions_Array = storeinfo.retailStoreQuestions_Arr
             } else {
@@ -72,12 +79,15 @@ class RetailReportMainViewController: UIViewController {
                  RetailsStoreQuestion(title: "Did you work on event?", isOn: false)
                 ]
             }
+        } else {
+            vw_SelectedStore.isHidden = true
         }
         
         tableView.tableFooterView = UIView()
         tableView.sizeToFit()
         tableView.reloadData()
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -102,9 +112,15 @@ class RetailReportMainViewController: UIViewController {
             
             self.retailStoreQuestions_Array = storeinfo.retailStoreQuestions_Arr
             
+            vw_SelectedStore.isHidden = false
+            lblSelectedStoreName.text = "\(storeinfo.storeName ?? "") , \(storeinfo.cityName ?? "") , \(storeinfo.stateName ?? "")"
+            
             btnNext.isGrayButton = false
             btnNext.awakeFromNib()
         } else {
+            
+            vw_SelectedStore.isHidden = true
+            
             btnNext.isGrayButton = true
             btnNext.awakeFromNib()
         }

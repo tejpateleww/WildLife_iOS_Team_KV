@@ -137,7 +137,15 @@ class RetailReportThirdViewController: UIViewController {
             
             var img : UIImage?
             assets.forEach { (asset) in
-                PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: nil) { (image, info) in
+                // PHImageManagerMaximumSize
+                
+                let manager = PHImageManager.default()
+                let option = PHImageRequestOptions()
+                option.isSynchronous = true
+                option.isNetworkAccessAllowed = true
+                option.resizeMode = .none
+                
+                manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: option ) { (image, info) in
                     //added to Img Arr
                     img = image!
                 }
@@ -285,6 +293,8 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
             
             if success {
                 
+                print(json)
+                
                 let id = self.arr_OfImages.count
                 let path = json["result"].stringValue
                 
@@ -300,8 +310,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         }
     }
     
-    
-    
     // Below function is Called when submit report button is pressed. WE collect all the data from these different modals
     // UserInfo (Submodals : ResProfileDatum)
     // StoreInfo (Submodal : RetailStoreQuestion)
@@ -310,7 +318,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
     func webServiceSubmit() {
         
         var params : [String:Any] = [:]
-        
         
         //User Information
         let data = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? Data
@@ -362,6 +369,10 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         params["did_you_leave_seps"] = did_you_leave_seps as Any
         params["did_you_work_an_event"] = did_you_work_an_event as Any
         
+        if (storeinfo?.isStoreAddedManually)! {
+            
+            params["new_store"] = 1 as Any
+        }
         
         //Brand Information
         let brandArrdata = userDefault.object(forKey: UserDefaultsKey.brandArr.rawValue) as? Data
@@ -377,6 +388,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                 scent_and_dispenser_facings1 = "\(brand.scentData.scent_And_Dispenser_Facings ?? 0)"
                 scent_and_dispenser_pallet_facings1 = "\(brand.scentData.scent_And_Dispenser_Pallet_Displays ?? 0)"
                 exclusive_end_cap_1 = "\(brand.scentData.does_this_Brand_have_An_Exclusive_EndCap ?? 0)"
+//                scent_elimination_end_cap =
                 
             case "Tink's / Dead Down Wind" :
                 brandname2 = brand.brandName
@@ -444,6 +456,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
             let key4 = "scent_and_dispenser_facings\(id!)"
             let key5 = "scent_and_dispenser_pallet_facings\(id!)"
             let key6 = "exclusive_end_cap_\(id!)"
+            let key7 = "scent_elimination_end_cap_0\(id!)"
             
             params[key1] = name! as Any
             params[key2] = (scentData?.scent_Elimination_Facings ?? 0) as Any
@@ -451,29 +464,18 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
             params[key4] = (scentData?.scent_And_Dispenser_Facings ?? 0) as Any
             params[key5] = (scentData?.scent_And_Dispenser_Pallet_Displays ?? 0) as Any
             params[key6] = (scentData?.does_this_Brand_have_An_Exclusive_EndCap ?? 0) as Any
+            params[key7] = (scentData?.scent_elimination_end_cap ?? 0) as Any
             
         })
         
         
         // Image Uploaded Information :
         
-        var arr_Of_ImgData_ToReportListVC : [PhotoModal] = []
+        //Create a comma separated string from photomodal
         
-        arr_PhotoModal.forEach { (modal) in
-            
-            if modal.type == "path" {
-                
-                let key = "photos_\(modal.id)"
-                params[key] = modal.img_ServerPAth
-                
-            } else {
-                
-                arr_Of_ImgData_ToReportListVC.append(modal)
-            }
-            
-        }
-        
-        self.arr_PhotoModal = arr_Of_ImgData_ToReportListVC
+        let str = self.arr_PhotoModal.map{$0.img_ServerPAth!}
+        let laststring = str.joined(separator: ",")
+        params["photos"] = laststring
             
         //Comment from local Textview
         
@@ -483,6 +485,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         }
         
         params["comments"] = commentTxt.trimmedString
+        
         
         print(params)
         
@@ -497,7 +500,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                     userDefault.removeObject(forKey: UserDefaultsKey.brandArr.rawValue)
                     userDefault.removeObject(forKey: UserDefaultsKey.brandData.rawValue)
                     
-                    
                     Utilities.displayAlert("Report submitted Successfully")
                     
                     let alert = UIAlertController(title: AppInfo.appName, message: "Report submitted successfully", preferredStyle: .alert)
@@ -511,9 +513,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                     alert.addAction(okAction)
                     
                     self.present(alert, animated: true, completion: nil)
-                    
-                    
-                    
                     
                 } else {
                     let alert = UIAlertController(title: AppInfo.appName, message: json["message"].stringValue, preferredStyle: .alert)
@@ -564,7 +563,6 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
                 userDefault.set(false, forKey: UserDefaultsKey.isStoreSelected.rawValue)
                 userDefault.removeObject(forKey: UserDefaultsKey.brandArr.rawValue)
                 userDefault.removeObject(forKey: UserDefaultsKey.brandData.rawValue)
-                
                 
                 
                 Utilities.displayAlert("Report Saved! You can synchronize your report later")
