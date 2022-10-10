@@ -24,7 +24,8 @@ class WebServiceSubClass{
     }
     
     class func addStoreManually( store: String, state: String, city: String, showhud: Bool = true, completion: @escaping CompletionResponse) {
-        WebService.shared.getMethod(api: .AddStoreManually, parameterString: "title=\(store)&state=\(state)&city=\(city)".replaceCharacter(oldCharacter: " ", newCharacter: ""), httpMethod: .get, showHud: showhud, completion: completion)
+        let query = "title=\(store)&state=\(state)&city=\(city)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        WebService.shared.getMethod(api: .AddStoreManually, parameterString: query, httpMethod: .get, showHud: showhud, completion: completion)
     }
     
     class func storeListForStatesAPI( title: String, state: String, showhud: Bool = false, completion: @escaping CompletionResponse) {

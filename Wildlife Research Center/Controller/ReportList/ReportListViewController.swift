@@ -244,21 +244,21 @@ extension ReportListViewController {
                 for j in 0..<arr_CurrentUser_OfflineReports[i].imgArr.count {
                     imgUploads_DispatchGroup.enter()
                     // WebService Call
-                    WebServiceSubClass.imageUploadAPI(image: UIImage(data: arr_CurrentUser_OfflineReports[i].imgArr[j].img_inDataForm!)!, showhud: false) { (json, success, resp) in
+                    Utilities.showHud()
+                    WebServiceSubClass.imageUploadAPI(image: UIImage(data: arr_CurrentUser_OfflineReports[i].imgArr[j].img_inDataForm!)!, showhud: true) { (json, success, resp) in
                         if success {
                             //json["result"].stringValue
-                            
+                            Utilities.hideHud()
                             imgStrArray.append(json["result"].stringValue)
+                            let finalString = imgStrArray.joined(separator: ",")
+                            paramDict!["photos"] = finalString
+                            
+                            let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
+                            self.arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
                             self.imgUploads_DispatchGroup.leave()
                         }
                     }
                 }
-                
-                let finalString = imgStrArray.joined(separator: ",")
-                paramDict!["photos"] = finalString
-                
-                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
-                self.arr_CurrentUser_OfflineReports[i].paramsDict = params_Data!
                 
                 
                 //                let params_Data = try? JSONSerialization.data(withJSONObject: paramDict!)
@@ -324,7 +324,7 @@ extension ReportListViewController {
     
     func submitAPI(paramModal: [String:Any] ) {
         
-        WebServiceSubClass.submit(params: paramModal as Any, showhud: false) { (json, success, resp) in
+        WebServiceSubClass.submit(params: paramModal as Any, showhud: true) { (json, success, resp) in
             
             if success {
                 

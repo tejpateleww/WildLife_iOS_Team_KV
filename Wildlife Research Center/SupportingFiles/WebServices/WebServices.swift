@@ -28,7 +28,9 @@ class WebService {
     func requestMethod(api: ApiKey, httpMethod:Method, showHud : Bool = false,parameters: Any, completion: @escaping CompletionResponse){
         
         guard isConnected else { completion(JSON(), false, ""); return }
-        
+        //if(showHud){
+            Utilities.showHud()
+        //}
         var parameterString = "" // "/"
         if httpMethod == .get{
             if let param = parameters as? [String:Any]{
@@ -56,18 +58,12 @@ class WebService {
             params = [:]
         }
         
-        if(showHud)
-        {
-            Utilities.showHud()
-        }
-        
         AF.request(url, method: method, parameters: params as? [String : Any], encoding: URLEncoding.httpBody, headers: APIEnvironment.headers).validate()
             .responseJSON { (response) in
                 // LoaderClass.hideActivityIndicator()
-                if(showHud)
-                {
+                //if(showHud){
                     Utilities.hideHud()
-                }
+                //}
                 print("The webservice call is for \(url) and the params are \n \(JSON(parameters))")
                 
                 if let json = response.value{
@@ -78,6 +74,7 @@ class WebService {
                 }
                 else {
                     //  LoaderClass.hideActivityIndicator()
+                    Utilities.hideHud()
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
@@ -251,10 +248,9 @@ class WebService {
         print("the url is \(url) and the parameters are \n \(dictParams) and the headers are \(APIEnvironment.headers)")
         
         
-        if(showHud)
-        {
+        //if(showHud){
             Utilities.showHud()
-        }
+        //}
 
         AF.upload(multipartFormData: { (multiPart) in
             for (key, value) in dictParams {
@@ -283,9 +279,9 @@ class WebService {
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: APIEnvironment.headers, interceptor: .none, fileManager: .default)
             .responseJSON { (response) in
                 
-                if(showHud){
+                //if(showHud){
                     Utilities.hideHud()
-                }
+                //}
                 //Do what ever you want to do with response
                 if let json = response.value{
                     let resJson = JSON(json)
@@ -297,6 +293,7 @@ class WebService {
                 }
                 else {
                     //  LoaderClass.hideActivityIndicator()
+                    Utilities.hideHud()
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{

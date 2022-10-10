@@ -24,12 +24,17 @@ extension UIViewController {
             
             self.navigationController?.isNavigationBarHidden = false
             //    self.navigationController?.navigationBar.isOpaque = false
-            self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 0.7452868819, blue: 0, alpha: 1)
-            self.navigationController?.navigationBar.tintColor = TintColour
             self.navigationController?.navigationBar.isTranslucent = isTranslucent
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white , NSAttributedString.Key.font : FontBook.AileronBold.staticFont(size: FontSize.size20.rawValue)]
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
+            
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor =  #colorLiteral(red: 1, green: 0.7452868819, blue: 0, alpha: 1)
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: TintColour]
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
             
             if leftButton == "back" {
                 let button = UIButton(type: UIButton.ButtonType.custom)

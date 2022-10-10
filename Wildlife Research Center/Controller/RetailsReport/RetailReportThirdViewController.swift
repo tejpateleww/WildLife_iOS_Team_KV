@@ -94,6 +94,8 @@ class RetailReportThirdViewController: UIViewController {
     var scent_and_dispenser_pallet_facings7 = ""
     var exclusive_end_cap_7 = ""
     
+    var imgStrArray : [String] = []
+    let imgUploads_DispatchGroup = DispatchGroup()
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
@@ -111,12 +113,15 @@ class RetailReportThirdViewController: UIViewController {
     
     //MARK:- Events
     @IBAction func takePictureFromCamera(_ sender: ThemeButton) {
-        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
             let vc = UIImagePickerController()
             vc.sourceType = .camera
-            vc.allowsEditing = true
+            //vc.allowsEditing = true
             vc.delegate = self
             present(vc, animated: true)
+        }else{
+            Utilities.displayAlert("Not Available")
+        }
     }
     
     @IBAction func takePictureFromLibrary(_ sender: ThemeButton) {
@@ -157,8 +162,14 @@ class RetailReportThirdViewController: UIViewController {
             if WebService.shared.isConnected { // Added to Modal
                 
                 //Save the server path from api call into arrPhotoModal
-                self.webServiceCallToUploadASingleImage(img: self.arr_OfImages.last!)
+                //self.webServiceCallToUploadASingleImage(img: self.arr_OfImages.last!)
                 
+                // Save the image as PNG DATA into the arrPhotomodal
+                let id = self.arr_PhotoModal.count
+                let imgData = self.arr_OfImages.last!.pngData()
+                
+                let newModal = PhotoModal(id: id, type: "img", serverPath: nil, img_inDataForm: imgData!)
+                self.arr_PhotoModal.append(newModal)
             } else {
                 
                 // Save the image as PNG DATA into the arrPhotomodal
@@ -174,7 +185,36 @@ class RetailReportThirdViewController: UIViewController {
     
     
     @IBAction func submitBtnClicked(_ sender: ThemeButton) {
-        webServiceSubmit()
+        uploadImages()
+    }
+    
+    func uploadImages() {
+        
+        if WebService.shared.isConnected {
+            for i in 0..<self.arr_PhotoModal.count {
+                imgUploads_DispatchGroup.enter()
+                WebServiceSubClass.imageUploadAPI(image: UIImage(data: self.arr_PhotoModal[i].img_inDataForm!)!, showhud: true) { (json, success, resp) in
+                    
+                    if success {
+                        
+                        print(json)
+                        self.imgStrArray.append(json["result"].stringValue)
+                        self.imgUploads_DispatchGroup.leave()
+        //                self.photo1_Name = json["result"].stringValue
+                    } else {
+                        Utilities.displayAlert(json["message"].stringValue)
+                    }
+                }
+            }
+            imgUploads_DispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                print("images uploaded")
+                
+                self.webServiceSubmit()
+            })
+            
+        }else{
+            webServiceSubmit()
+        }
     }
     
     @IBAction func btnTapAction_HowtoCountFacings(_ sender: UIButton) {
@@ -260,7 +300,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        guard let image = info[.editedImage] as? UIImage else {
+        guard let image = info[.originalImage] as? UIImage else {
             print("No image found")
             return
         }
@@ -273,7 +313,14 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         
         if WebService.shared.isConnected {
             //Save the server path from api call into arrPhotoModal
-            webServiceCallToUploadASingleImage(img: image)
+            //webServiceCallToUploadASingleImage(img: image)
+            
+            // Save the image as PNG DATA into the arrPhotomodal
+            let id = self.arr_PhotoModal.count
+            let imgData = image.pngData()
+            
+            let newModal = PhotoModal(id: id, type: "img", serverPath: nil, img_inDataForm: imgData!)
+            self.arr_PhotoModal.append(newModal)
             
         } else {
             
@@ -473,8 +520,7 @@ extension RetailReportThirdViewController: UIImagePickerControllerDelegate, UINa
         
         //Create a comma separated string from photomodal
         
-        let str = self.arr_PhotoModal.map{$0.img_ServerPAth!}
-        let laststring = str.joined(separator: ",")
+        let laststring = imgStrArray.joined(separator: ",")
         params["photos"] = laststring
             
         //Comment from local Textview

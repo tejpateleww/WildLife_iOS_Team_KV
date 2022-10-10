@@ -34,11 +34,14 @@ enum UserDefaultsKey : String {
     case submitsToSync = "submitsToSync"
     
     case appUsers = "appUsers"
+    case photos = "photos"
+    case comment = "comment"
 }
 
 enum APIEnvironment : String {
     
-    case baseUrl = "http://wildlife.excellentwebworld.in/"
+    case baseUrl = "https://wildlife.com/cmsAdmin/api/"
+    //http://wildlife.excellentwebworld.in/
     case mediaUrl = ""
     
     static var baseURL: String{

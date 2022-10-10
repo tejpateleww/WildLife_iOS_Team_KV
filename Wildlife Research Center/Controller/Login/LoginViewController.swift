@@ -221,7 +221,7 @@ class LoginViewController: UIViewController {
             }
             else
             {
-                Utilities.displayAlert("Error", message: json["message"].string!)
+                Utilities.displayAlert("Error", message: json["message"].string ?? "")
             }
         }
         

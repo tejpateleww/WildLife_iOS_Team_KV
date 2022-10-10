@@ -23,6 +23,7 @@ class SelectStoreViewController: UIViewController {
     
     @IBOutlet weak var txtfield_CityNameManually: UITextField!
     
+    @IBOutlet weak var txtfieldStateNameManually: UITextField!
     
     @IBOutlet weak var btnGetListOfStores: ThemeButton!
     @IBOutlet weak var btnUseThisStore: ThemeButton!
@@ -127,6 +128,8 @@ class SelectStoreViewController: UIViewController {
                 
                 self.btnStateName_Manually.setTitle(storeinfo.stateName, for: .normal)
                 
+                self.txtfieldStateNameManually.text = storeinfo.stateName
+                
                 self.txtfield_CityNameManually.text = storeinfo.cityName
                 
                 selectedValue_3 = storeinfo.storeName
@@ -152,7 +155,7 @@ class SelectStoreViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavBarWithMenuORBack(Title: "Select Store", leftButton: "back", IsNeedRightButton: false, isTranslucent: false, isRounded: false)
+        setNavBarWithMenuORBack(Title: "Store Information", leftButton: "back", IsNeedRightButton: false, isTranslucent: false, isRounded: false)
         
         
     }
@@ -207,8 +210,9 @@ class SelectStoreViewController: UIViewController {
         if WebService.shared.isConnected {
             
             var city = ""
+            var state = ""
             
-            if btnStateName_Manually.title(for: .normal) == "Select" {
+            if txtfieldStateNameManually.text == "" && btnStateName_Manually.title(for: .normal) == "Select" {
                 btnStateName_Manually.layer.borderWidth = 0.5
                 btnStateName_Manually.layer.borderColor = UIColor.red.cgColor
             }
@@ -220,16 +224,16 @@ class SelectStoreViewController: UIViewController {
             }
         
             
-            guard txtfieldStoreNameManually.text?.count != 0  else { showAlert(msg: "Please enter a store name")
+            guard txtfieldStoreNameManually.text != ""  else { showAlert(msg: "Please enter store name")
             return
             }
             
-            guard btnStateName_Manually.title(for: .normal) != "Select" else { showAlert(msg: "Please select a value")
+            guard txtfieldStateNameManually.text != "" else { showAlert(msg: "Please enter state name")
                 return
             }
-            
-            guard btnCityName_Manually.title(for: .normal) != "Select" || txtfield_CityNameManually.text != "" else {
-                showAlert(msg: "Please select a value")
+            //btnCityName_Manually.title(for: .normal) != "Select" ||
+            guard txtfield_CityNameManually.text != "" else {
+                showAlert(msg: "Please enter city name")
                 return
             }
             
@@ -238,23 +242,30 @@ class SelectStoreViewController: UIViewController {
             } else {
                 city = btnCityName_Manually.title(for: .normal)!
             }
+            if txtfieldStateNameManually.text != "" {
+                state = txtfieldStateNameManually.text ?? ""
+            }
             
-            webService_AddStoreManually(citytxt: city)
+            webService_AddStoreManually(citytxt: city, statetxt: state)
             
         } else {
             
             guard let storetxt = txtfieldStoreNameManually.text, storetxt.count != 0 else {
-                showAlert(msg: "Please enter a value")
+                showAlert(msg: "Please enter store name")
                 return
             }
             
-            guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else {
-                showAlert(msg: "Please select a value")
+            guard let statetxt = txtfieldStateNameManually.text, statetxt != "" else {
+                showAlert(msg: "Please enter state name")
                 return
             }
-            
-            guard btnCityName_Manually.title(for: .normal) != "Select" && txtfield_CityNameManually.text != "" else {
-                showAlert(msg: "Please select a value")
+//            guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else {
+//                showAlert(msg: "Please select a value")
+//                return
+//            }
+            //btnCityName_Manually.title(for: .normal) != "Select" &&
+            guard txtfield_CityNameManually.text != "" else {
+                showAlert(msg: "Please enter city name")
                 return
             }
             
@@ -539,9 +550,9 @@ class SelectStoreViewController: UIViewController {
  */
     
     
-    func webService_AddStoreManually(citytxt: String) {
+    func webService_AddStoreManually(citytxt: String, statetxt: String) {
         guard let storetxt = txtfieldStoreNameManually.text, storetxt != "", storetxt != "Select" else { return }
-        guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else { return }
+        //guard let statetxt = btnStateName_Manually.title(for: .normal), statetxt != "", statetxt != "Select" else { return }
 //        guard let citytxt = btnCityName_Manually.title(for: .normal), citytxt != "", citytxt != "Select" else { return }
         
         //        guard let citytxt = txtfieldCityNameManually.text, citytxt != "", citytxt != "Select" else { return }
